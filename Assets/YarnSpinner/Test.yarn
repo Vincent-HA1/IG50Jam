@@ -1,0 +1,147 @@
+﻿//ENVIRONMENT
+title: Light_Check
+---
+<<declare $light_on = true>>
+<<if $light_on>>
+    Turn off the light?
+
+    -> Yes
+        <<light_off DialogueManager>>
+        <<set $light_on = false>>
+        You flicked the switch off.
+    -> No
+        You decided to leave it on.
+
+<<else>>
+    Turn on the light?
+
+    -> Yes
+        <<light_on DialogueManager>>
+        <<set $light_on = true>>
+        You flicked the switch on.
+    -> No
+        You decided to leave it alone.
+<<endif>>
+===
+
+title: PC
+---
+The computer won't turn on
+Punch it?
+-> Yes
+    //Do whatever
+    You punched the computer. It didn't respond. 
+-> No
+    You save your fist for another day
+===
+
+title: Bed
+---
+<<declare $has_key = false>>
+There seem to be faint bloodstains on the bed ...
+<<if $has_key == false>>
+    You feel a strange hard object beneath the blankets
+    Pull it out?
+    -> Yes
+        You pull out a small rusty key
+        <<set $has_key = true>>
+    -> No
+        You decide against it
+<<endif>>
+===
+
+title: Table
+---
+<<declare $has_documents = false>>
+<<if $has_key>>
+    <<if $has_documents == false>>
+        You open the drawers with the rusty key. Inside are a set of documents.
+        Take the documents? 
+
+        -> Yes
+            <<obtain_evidence GameManager "Documents">>
+            <<set $has_documents = true>>
+            Obtained Sealed Documents
+        -> Leave them be
+            You decided to leave the documents. Taking them could cause suspicion after all
+    <<else>>
+        The drawer is empty
+    <<endif>>
+<<else>>
+    You try to open the drawers, but they're locked
+<<endif>>
+===
+
+title: Bottle
+---
+The bottle is filled with a dark, viscous liquid
+===
+
+//CHARACTER DIALOGUE
+title: TestCharacter
+---
+<<start_character_conv CharacterManager "Miku" "Miku2">>
+Miku: Find anything yet?
+Miku2: Nope. Haven't really looked, though.
+<<show_character_expression CharacterManager "Miku" "angry">>
+Miku: What?! I've been searching this whole time while you've just been standing there?!
+<<show_character_expression CharacterManager "Miku2" "angry">>
+Miku2: Well, nobody told you to do all the work.
+<<show_character_expression CharacterManager "Miku" "sad">>
+Miku: ...
+Miku: Ugh. At this rate, we're never going to find it.
+<<show_character_expression CharacterManager "Miku2" "sad">>
+Miku2: Aw, don't be like that. Now that I'm helping, we'll find it in no time!
+<<show_character_expression CharacterManager "Miku" "angry">>
+Miku: Why you...
+<<show_character_expression CharacterManager "Miku" "happy">>
+<<show_character_expression CharacterManager "Miku2" "angry">>
+Miku: You're impossible, you know that?
+<<end_character_conv CharacterManager>>
+===
+
+//Cutscene Testing
+title: Cutscene
+---
+<<show_cutscene DialogueManager 0>>
+I looked all over for her.
+<<next_cutscene_image DialogueManager>>
+All the places we used to go.
+<<next_cutscene_image DialogueManager>>
+But I just couldn't find her.
+<<next_cutscene_image DialogueManager>>
+Write something random.
+<<next_cutscene_image DialogueManager>>
+Next thing I knew...
+<<next_cutscene_image DialogueManager>>
+The day had come to an end
+===
+
+
+title: Sound
+---
+I am going to play a song.
+<<play_music SoundManager act_1>> 
+See?
+Now I am going to change the song.
+<<play_music SoundManager sneak>> 
+The song has now changed
+I'll now stop the song
+<<stop_music SoundManager>>
+Let's play a song and add some sfx
+<<play_music SoundManager act_1>> 
+<<play_sfx SoundManager tap>> 
+Now that it's playing, let's play a one shot
+<<play_sfx_one_shot SoundManager wash_face>>
+Ok, let's stop the sfx
+<<stop_sfx SoundManager>>
+And stop the music
+<<stop_music SoundManager>>
+
+
+===
+
+title: Anni
+---
+Bob the builder
+===

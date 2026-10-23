@@ -785,8 +785,8 @@ MonoBehaviour:
   sfxSource: {fileID: 0}
   musicFiles:
   - soundName: act_1
-    audioFile: {fileID: 8300000, guid: 375bdcc1ce4ec2e4ba0d3913140a0c19, type: 3}
-    audioLoopFile: {fileID: 8300000, guid: 375bdcc1ce4ec2e4ba0d3913140a0c19, type: 3}
+    audioFile: {fileID: 8300000, guid: 1bad7a16130365d42a740159482c864a, type: 3}
+    audioLoopFile: {fileID: 8300000, guid: 24ee5d44a081f4b4e83d3b93240d4178, type: 3}
     volume: 0.5
     loop: 1
   - soundName: sneak

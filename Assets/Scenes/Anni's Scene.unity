@@ -1013,6 +1013,10 @@ PrefabInstance:
       propertyPath: musicSource
       value: 
       objectReference: {fileID: 170002809}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: musicFiles.Array.data[0].audioLoopFile
+      value: 
+      objectReference: {fileID: 8300000, guid: 59d4fa4a2f0c63c43b36277471dd76a6, type: 3}
     - target: {fileID: 7603672208978628994, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

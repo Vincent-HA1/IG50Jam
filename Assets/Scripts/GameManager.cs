@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
             inventory = loadedSave.evidence;
             foreach (Evidence evidence in inventory)
             {
-                print(evidence);
                 Add_Evidence(evidence.evidenceName);
             }
         }

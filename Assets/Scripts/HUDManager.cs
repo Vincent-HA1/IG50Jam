@@ -20,7 +20,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] EvidenceScreen evidenceScreen;
     [SerializeField] GameObject blockClicks;
 
-    List<EvidenceIcon> evidenceIcons;
+    List<EvidenceIcon> evidenceIcons = new List<EvidenceIcon>();
 
     bool gamePaused = false;
     bool casePanelOpen = false;

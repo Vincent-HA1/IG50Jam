@@ -783,23 +783,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 0}
   sfxSource: {fileID: 0}
-  sfxOneShot: {fileID: 0}
   musicFiles:
   - soundName: act_1
     audioFile: {fileID: 8300000, guid: 375bdcc1ce4ec2e4ba0d3913140a0c19, type: 3}
+    audioLoopFile: {fileID: 8300000, guid: 375bdcc1ce4ec2e4ba0d3913140a0c19, type: 3}
     volume: 0.5
     loop: 1
   - soundName: sneak
     audioFile: {fileID: 8300000, guid: fc44e7438cff0474a8466f2a202adf39, type: 3}
+    audioLoopFile: {fileID: 0}
     volume: 1
     loop: 1
   sfxFiles:
   - soundName: wash_face
     audioFile: {fileID: 8300000, guid: fb2de3ddfb3dd184396c3b58a7f9e78a, type: 3}
+    audioLoopFile: {fileID: 0}
     volume: 0.6
     loop: 0
   - soundName: tap
     audioFile: {fileID: 8300000, guid: 23119773d801c3046831828b75cb6f46, type: 3}
+    audioLoopFile: {fileID: 0}
     volume: 0.6
     loop: 1
   fadeInDuration: 1

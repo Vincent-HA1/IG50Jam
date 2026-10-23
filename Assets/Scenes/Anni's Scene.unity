@@ -1022,9 +1022,25 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[1].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[2].volume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[0].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: 7c5b36c060cda1e4c827f61c8435b8fb, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[1].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: b46b7254e0788ae4d91069cd64dc3f44, type: 3}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[2].audioFile
       value: 

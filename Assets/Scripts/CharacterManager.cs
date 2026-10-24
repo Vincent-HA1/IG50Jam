@@ -20,14 +20,18 @@ public class CharacterManager : MonoBehaviour
     Character character2;
 
     [YarnCommand("start_character_conv")]
-    public void StartCharacterConversation(string char1, string char2)
+    public void StartCharacterConversation(string char1, string char2 = "")
     {
         //enable the portraits
         character1Image.sprite = characterDatabase.GetCharacterPose(char1);
-        character2Image.sprite = characterDatabase.GetCharacterPose(char2);
-        charactersParent.SetActive(true);
         character1 = characterDatabase.GetCharacter(char1);
-        character2 = characterDatabase.GetCharacter(char2);
+        if (char2.Length > 0)
+        {
+            character2Image.sprite = characterDatabase.GetCharacterPose(char2);
+            character2 = characterDatabase.GetCharacter(char2);
+        }
+        character2Image.enabled = char2.Length > 0;
+        charactersParent.SetActive(true);
 
     }
 

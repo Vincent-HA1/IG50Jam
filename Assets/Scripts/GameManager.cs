@@ -16,8 +16,15 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] List<Evidence> allEvidence;
+    [SerializeField] List<Button> allTravelArrows;
     [SerializeField] Animator SceneFadeAnimator;
     [SerializeField] GameObject startingRoom;
+    [SerializeField] GameObject itemsCanvas;
+    [SerializeField] Image itemImage;
+
+    [Header("Settings")]
+    [SerializeField] bool playCutsceneOnStart = false;
+    [SerializeField] int indexOfCutsceneToPlay;
 
     List<Evidence> inventory = new List<Evidence>();
 
@@ -28,16 +35,80 @@ public class GameManager : MonoBehaviour
     public static bool cannotAct = false;
     public bool fadedOut = false;
 
+
+    [YarnCommand("obtain_evidence")]
+    public void Add_Evidence(string evidenceName)
+    {
+        //Have a dictionary to map evidence name to evidence files
+        print($"Added {evidenceName} to the inventory");
+        Evidence evidenceToAdd = allEvidence.Find(evidence => evidence.evidenceName == evidenceName);
+        if (evidenceToAdd != null)
+        {
+            //Add to inventory
+            if (!inventory.Contains(evidenceToAdd)) inventory.Add(evidenceToAdd);
+            //add to the HUD too
+            hudManager.AddEvidence(evidenceToAdd);
+        }
+    }
+
+    [YarnCommand("show_evidence")]
+    public void Show_Evidence(string evidenceName)
+    {
+        //Have a dictionary to map evidence name to evidence files
+        Evidence evidenceToShow = allEvidence.Find(evidence => evidence.evidenceName == evidenceName);
+        if (evidenceToShow != null)
+        {
+            itemsCanvas.SetActive(true);
+            itemImage.sprite = evidenceToShow.evidenceFull;
+        }
+    }
+
+
+    [YarnCommand("hide_evidence")]
+    public void Hide_Evidence()
+    {
+        itemsCanvas.SetActive(false);
+    }
+
+
+    [YarnCommand("block_travel")]
+    public void Block_Travel()
+    {
+        //disable all arrows
+        allTravelArrows.ForEach(button => button.gameObject.SetActive(false));
+    }
+
+    [YarnCommand("allow_travel")]
+    public void Allow_Travel()
+    {
+        //enable all arrows
+        allTravelArrows.ForEach(button => button.gameObject.SetActive(true));
+    }
+
+    [YarnCommand("goto_room")]
+    public void GoToRoomFromDialogue(string roomName)
+    {
+        List<GameObject> objects = FindObjectsByType<GameObject>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None
+        ).ToList();
+
+        TransitionRoom(objects.Find(obj => obj.name == roomName));
+    }
+
     public void TransitionRoom(GameObject roomToGoTo)
     {
         FadeOut();
         StartCoroutine(GoToRoomAfterFade(roomToGoTo));
     }
 
+
+
+    [YarnCommand("change_location")]
     public void GoToLocation(string locationName)
     {
         //Save 
-        SaveSystem.SaveGame(SceneManager.GetActiveScene().name, inventory);
+        SaveSystem.SaveGame(SceneManager.GetActiveScene().name, inventory.Select(evidence => evidence.evidenceName).ToList());
         FadeOut();
         StartCoroutine(GoToSceneAfterFade(locationName));
     }
@@ -65,6 +136,7 @@ public class GameManager : MonoBehaviour
         fadedOut = true;
         yield return new WaitForNextFrameUnit();
         FadeIn();
+
     }
 
     // Start is called before the first frame update
@@ -75,10 +147,10 @@ public class GameManager : MonoBehaviour
         //Add all evidence back to the inventory
         if (loadedSave != null)
         {
-            inventory = loadedSave.evidence;
-            foreach (Evidence evidence in inventory)
+            List<string> evidenceNames = loadedSave.evidence;
+            foreach (string evidenceName in evidenceNames)
             {
-                Add_Evidence(evidence.evidenceName);
+                Add_Evidence(evidenceName);
             }
         }
         hudManager.GoToTitle += () =>
@@ -92,7 +164,15 @@ public class GameManager : MonoBehaviour
         clickableElements = FindObjectsOfType<Button>(true).Where(x => x.CompareTag("Clickable")).ToList();
         EnableClickableElements(false);
         currentRoom = startingRoom;
-        StartCoroutine(WaitForFade());
+        if (playCutsceneOnStart)
+        {
+            fadedOut = true; //already faded out when scene starts
+            dialogueController.PlayCutscene(indexOfCutsceneToPlay);
+        }
+        else
+        {
+            StartCoroutine(WaitForFade());
+        }
     }
 
 
@@ -146,28 +226,19 @@ public class GameManager : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
+        if (eventSystem.enabled)
+        {
+            eventSystem.SetSelectedGameObject(null);
+        }
         //if (Input.GetKeyDown("l"))
         //{
         //    SaveSystem.SaveGame(SceneManager.GetActiveScene().name, inventory);
         //}
     }
 
-    [YarnCommand("obtain_evidence")]
-    public void Add_Evidence(string evidenceName)
-    {
-        //Have a dictionary to map evidence name to evidence files
-        print($"Added {evidenceName} to the inventory");
-        Evidence evidenceToAdd = allEvidence.Find(evidence => evidence.evidenceName == evidenceName);
-        if (evidenceToAdd != null)
-        {
-            //Add to inventory
-            if(!inventory.Contains(evidenceToAdd)) inventory.Add(evidenceToAdd);
-            //add to the HUD too
-            hudManager.AddEvidence(evidenceToAdd);
-        }
-    }
+
 
 
 }

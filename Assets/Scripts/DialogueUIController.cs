@@ -40,6 +40,7 @@ public class DialogueUIController : MonoBehaviour
         if (cutsceneIndex >= cutscenes.Count || cutscenePlaying) return;
         cutscenePlaying = true;
         currentCutscene = cutscenes[cutsceneIndex];
+        print(cutsceneIndex);
         if (currentCutscene != null)
         {
             //Enable cutscene
@@ -50,10 +51,14 @@ public class DialogueUIController : MonoBehaviour
     IEnumerator StartCutsceneAfterFade()
     {
         //Fade out and play cutscene
-        StartCoroutine(gameManager.FadeOutAndIn());
-        dialogueInput.canAdvanceText = false;
-        yield return null;
-        yield return new WaitUntil(() => gameManager.fadedOut);
+        //If the scene is already faded out, no need to fade out
+        if (!gameManager.fadedOut)
+        {
+            StartCoroutine(gameManager.FadeOutAndIn());
+            dialogueInput.canAdvanceText = false;
+            yield return null;
+            yield return new WaitUntil(() => gameManager.fadedOut);
+        }
         StartCutscene();
         yield return new WaitUntil(() => GameManager.cannotAct == false);
         //run dialogue
@@ -111,6 +116,20 @@ public class DialogueUIController : MonoBehaviour
             return;
         runner.StartDialogue(nodeTitle);
     }
+
+    [YarnCommand("play_dialogue_delay")]
+    public void DialoguePlayAfterFade(string nodeTitle)
+    {
+        StartCoroutine(DialoguePlayAfterFadeCoroutine(nodeTitle));
+    }
+
+    IEnumerator DialoguePlayAfterFadeCoroutine(string nodeTitle)
+    {
+        yield return new WaitUntil(() => !dialogueIsPlaying);
+        yield return new WaitUntil(() => GameManager.cannotAct == false);
+        DialoguePlay(nodeTitle);
+    }
+
 
     private void Start()
     {

@@ -1,0 +1,188 @@
+﻿title: Bathroom_Cutscene
+---
+<<play_music SoundManager act_1>> 
+<<play_sfx SoundManager tap>> 
+<<show_cutscene DialogueManager 0>>
+The bathroom, cramped. 
+
+The overhead light flickered intermittently, casting a sickly yellow glow across cracked white tiles. Ashe stands before the porcelain sink, shoulders slumped, hands resting against the edges with a toothbrush between her fingers as the sound of running water fills the air.
+
+Her gaze is fixed on her reflection in the mirror, though there is little focus in her eyes. Dark circles shadow them, and her expression is drawn with exhaustion, her lips resting in a faint, unhappy line.
+
+She has been standing there for some time, too tired to move and too lost in thought to look away. Her mind is pushing unwanted memories into her skull about her father.
+
+Teddy. A Police Officer. A professional rule-follower, an occasional terrible-joke enthusiast, and the sort of man who thought a uniform could fix just about anything. He used to run towards danger while everyone else ran away.
+
+Then came the accident.
+
+One moment, he was a police officer doing his job. The next, he was in a hospital bed, one leg gone, and neither of them had the faintest idea what came next.
+
+A reminder of a disinfectant smell.
+
+Relentless hospital beeping.
+
+Teddy staring at the space where his leg used to be.
+
+The urge to say something comforting, but Ashe's emotional support software had crashed. So she stood there, silent and frozen in time.
+
+The doctors told Ashe how lucky she was that he survived.
+
+Ashe: Lucky.
+That's what everyone called it. As if Teddy losing a leg was an acceptable trade-off for staying alive.
+Ashe: People love saying the right things when they don't have to live with the aftermath.
+A forced, crooked smile.
+A heavy sigh.
+<<play_sfx_one_shot SoundManager wash_face>>
+A splash of cold water over her face. 
+<<stop_sfx SoundManager>>
+The hope that it'll wash away the thoughts along with the toothpaste.
+<<play_dialogue_delay DialogueManager Ashe_1>>
+===
+
+title: Bathroom_Test
+---
+The hope that it'll wash away the thoughts along with the toothpaste.
+<<play_dialogue_delay DialogueManager Ashe_1>>
+===
+
+
+title: Ashe_1
+---
+<<start_character_conv CharacterManager "Ashe">>
+Ashe: ...
+<<show_character_expression CharacterManager "Ashe" "sad">>
+Ashe: I should go wake up Dad.
+<<end_character_conv CharacterManager>>
+===
+
+title: Enter_Living_Room
+---
+<<if $seen_eviction == false>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: What's that under the door? 
+	<<block_travel GameManager>>
+	<<end_character_conv CharacterManager>>
+<<endif>>
+===
+
+title: Go_To_Neighbour
+---
+<<if $speak_to_teddy == false>>
+	I need to go talk to Dad.
+<<else>>
+	<<goto_room GameManager Neighbours>>
+	<<wait 2>>
+	<<play_dialogue_delay DialogueManager Neighbour>>
+<<endif>>
+===
+
+title: Eviction_Under_Door
+---
+<<declare $seen_eviction = false>>
+<<if $seen_eviction == false>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: What the...
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe: We're getting ... evicted?
+	Ashe: ...
+	<<set $seen_eviction = true>>
+	<<allow_travel GameManager>>
+<<else>>
+	...
+	No point looking at it again
+<<endif>>
+<<end_character_conv CharacterManager>>
+===
+
+title: Enter_Teddy_Room
+---
+<<declare $entered_teddy_room = false>>
+<<if $entered_teddy_room == false>>
+	...thud
+	Gotta pick up the bottle.
+	<<set $entered_teddy_room = true>>
+<<endif>>
+===
+
+title: Block_Leave
+---
+<<if $seen_eviction == false>>
+	I need to check what's under the door
+<<endif>>
+===
+
+title: Medicine_Bottle
+---
+...
+I'm going to have to pick them all up later.
+
+===
+
+title: Examine_Box
+---
+<<declare $checked_box = false>>
+<<if $checked_box == false>>
+	What's this? 
+	<<show_evidence GameManager "Case Files">>
+	Case files?
+	...
+	I can't believe Dad hid this from me.
+	<<obtain_evidence GameManager "Case Files">>
+	<<hide_evidence GameManager>>
+	You got Case Files.
+	<<set $checked_box = true>>
+<<endif>>
+===
+
+title: Teddy
+---
+<<declare $speak_to_teddy = false>>
+<<if $checked_box == false>>
+	...
+	Dad must be tired.
+	Let's let him sleep for a little while longer
+<<else>>
+	<<if $speak_to_teddy == false>>
+		//Speak with Teddy
+		<<start_character_conv CharacterManager "Ashe">>
+		Ashe: Dad. Wake up. We need to talk.
+		<<start_character_conv CharacterManager "Ashe" "Teddy">>
+		Teddy: A-ashe? Y-yawn. What did you want to talk about?
+		<<show_character_expression CharacterManager "Ashe" "angry">>
+		Ashe: Why didn't you tell me about the eviction! 
+		<<show_character_expression CharacterManager "Teddy" "sad">>
+		Teddy:...
+		<<set $speak_to_teddy = true>>
+		<<end_character_conv CharacterManager>>
+		Ashe: I need to speak to Janet. Maybe she's being evicted too
+	<<else>>
+		<<start_character_conv CharacterManager "Ashe" "Teddy">>
+		Ashe:...
+		Teddy: I'm sorry Ashe.
+		<<end_character_conv CharacterManager>>
+	<<endif>>
+<<endif>>
+===
+
+title: Neighbour
+---
+<<if $speak_to_teddy == true>>
+	<<start_character_conv CharacterManager "Ashe" "Neighbour">>
+	Ashe: Janet! Do you know anything about the eviction?
+	Janet: ...So you've seen it too.
+	Janet: Don't get involved Ashe. This is too dangerous for someone as young as you.
+	Janet: Even your father ...
+	<<show_character_expression CharacterManager "Ashe" "angry">>
+	Ashe: "What about my dad?"
+	Janet: ...
+	Janet: It's Victor Winslow. He owns this complex.
+	Janet: ... I know I won't be able to stop you. Stay safe Ashe.
+	Ashe: ...
+	<<end_character_conv CharacterManager>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: ... What do I have to lose? 
+	<<end_character_conv CharacterManager>>
+	<<change_location GameManager "Location1">>
+<<endif>>
+===
+

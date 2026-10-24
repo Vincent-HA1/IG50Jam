@@ -21,5 +21,20 @@ MonoBehaviour:
   - characterName: Miku2
     defaultPose: {fileID: 21300000, guid: f1e44da7f5d08cf44afaa5ba2f1bc90b, type: 3}
     angry: {fileID: 21300000, guid: f338a652d3157cb47abca5d0770bb44f, type: 3}
+    sad: {fileID: 21300000, guid: 09dafbfcc0beb154cac7b8fdd8e3fe46, type: 3}
+    happy: {fileID: 21300000, guid: 6a3b692cd2c8e9d43b6a7d852621eb6a, type: 3}
+  - characterName: Ashe
+    defaultPose: {fileID: 21300000, guid: f1e44da7f5d08cf44afaa5ba2f1bc90b, type: 3}
+    angry: {fileID: 21300000, guid: 6c7fd9a4173a5704598db696a390d531, type: 3}
     sad: {fileID: 21300000, guid: 6a3b692cd2c8e9d43b6a7d852621eb6a, type: 3}
+    happy: {fileID: 21300000, guid: 6a3b692cd2c8e9d43b6a7d852621eb6a, type: 3}
+  - characterName: Teddy
+    defaultPose: {fileID: 21300000, guid: f1e44da7f5d08cf44afaa5ba2f1bc90b, type: 3}
+    angry: {fileID: 21300000, guid: 6c7fd9a4173a5704598db696a390d531, type: 3}
+    sad: {fileID: 21300000, guid: 09dafbfcc0beb154cac7b8fdd8e3fe46, type: 3}
+    happy: {fileID: 21300000, guid: 6a3b692cd2c8e9d43b6a7d852621eb6a, type: 3}
+  - characterName: Neighbour
+    defaultPose: {fileID: 21300000, guid: f1e44da7f5d08cf44afaa5ba2f1bc90b, type: 3}
+    angry: {fileID: 21300000, guid: f338a652d3157cb47abca5d0770bb44f, type: 3}
+    sad: {fileID: 21300000, guid: 09dafbfcc0beb154cac7b8fdd8e3fe46, type: 3}
     happy: {fileID: 21300000, guid: 6a3b692cd2c8e9d43b6a7d852621eb6a, type: 3}

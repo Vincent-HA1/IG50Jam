@@ -5,12 +5,10 @@ using System.IO;
 
 public static class SaveSystem 
 {
-    public static void SaveGame(string locationName, List<Evidence> evidence)
+    public static void SaveGame(string locationName, List<string> evidence)
     {
         SaveClass save = new SaveClass(locationName, evidence);
         string savePath = Application.persistentDataPath + $".json";
-
-        JsonUtility.ToJson(save);
         string json = JsonUtility.ToJson(save, true);
         File.WriteAllText(savePath, json);
     }
@@ -40,9 +38,9 @@ public static class SaveSystem
 public class SaveClass
 {
     public string locationName;
-    public List<Evidence> evidence;
+    public List<string> evidence;
 
-    public SaveClass(string locationName, List<Evidence> evidence)
+    public SaveClass(string locationName, List<string> evidence)
     {
         this.locationName = locationName;
         this.evidence = evidence;

@@ -1088,7 +1088,7 @@ PrefabInstance:
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.data[3].audioFile
       value: 
-      objectReference: {fileID: 8300000, guid: b308fe1747a824e439b8a7940d4ecdd4, type: 3}
+      objectReference: {fileID: 8300000, guid: edc620fff1a378842801ea5d4409b6a1, type: 3}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.data[3].soundName
       value: Text_Notification

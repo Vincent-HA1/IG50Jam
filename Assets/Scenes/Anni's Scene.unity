@@ -1014,8 +1014,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 170002809}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[2].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[3].loop
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[2].loop
@@ -1030,6 +1042,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[2].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[3].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[2].volume
       value: 1
       objectReference: {fileID: 0}
@@ -1041,6 +1061,22 @@ PrefabInstance:
       propertyPath: sfxFiles.Array.data[1].audioFile
       value: 
       objectReference: {fileID: 8300000, guid: b46b7254e0788ae4d91069cd64dc3f44, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[2].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: 087fc22b495b3b745b75c238dedc726c, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[2].soundName
+      value: AshesPhone_Ringing
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[3].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: 451660eeac0077c47ae4dce611318a54, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[3].soundName
+      value: Calling_Anon
+      objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[2].audioFile
       value: 

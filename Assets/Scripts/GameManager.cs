@@ -113,6 +113,32 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GoToSceneAfterFade(locationName));
     }
 
+    [YarnCommand("enable_object")]
+    public void EnableObject(string objectName)
+    {
+        List<GameObject> objects = FindObjectsByType<GameObject>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None
+        ).ToList();
+
+        objects.Find(obj => obj.name == objectName).SetActive(true);
+    }
+
+    [YarnCommand("disable_object")]
+    public void DisableObject(string objectName)
+    {
+        GameObject.Find(objectName).SetActive(false);
+    }
+
+    [YarnCommand("end_game")]
+    public void EndGame()
+    {
+        //Save 
+        SaveSystem.DeleteSave();
+        FadeOut();
+        StartCoroutine(GoToSceneAfterFade("TitleScreen"));
+    }
+
     void FadeOut()
     {
         cannotAct = true;
@@ -228,7 +254,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (eventSystem.enabled)
+        //Disable selection for non dialogue
+        if (eventSystem.enabled && !DialogueUIController.dialogueIsPlaying )
         {
             eventSystem.SetSelectedGameObject(null);
         }

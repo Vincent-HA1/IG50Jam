@@ -1,5 +1,279 @@
-﻿title: OutsideOfOffice
+﻿title: Outside_Of_Office
 ---
+<<play_music SoundManager act_2>> 
 Ashe: ...
 Ashe: ... I guess I made it all the way here. 
+===
+
+title: Doorman
+---
+Doesn't seem like he's going to budge.
+===
+
+title: Enter_Office
+---
+<<declare $entered_office = false>>
+<<if $entered_office == false>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: ... Probably time for me to go in.
+	ring-ring...ring-ring
+	Ashe: What? ... Dad? 
+	<<start_character_conv CharacterManager "Ashe" "Teddy">>
+	<<show_character_expression CharacterManager "Teddy" "angry">>
+	Teddy: Ashe! Where are you? You're not in danger are you? 
+	<<show_character_expression CharacterManager "Ashe" "angry">>
+	Ashe: I'm fine! I'm just ... out somewhere.  
+	Teddy: Ashe, I know you can be reckless, but please don't do anything to put yourself in harm's way.
+	<<show_character_expression CharacterManager "Teddy" "sad">>
+	Teddy: There are people out there who can hurt you. I ... want you to be safe.
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe: I'll be fine Dad. I'll be back for dinner.
+	Teddy: ... Alright. Stay safe. 
+	<<end_character_conv CharacterManager>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: ... 
+	<<end_character_conv CharacterManager>>
+	<<set $entered_office = true>>
+<<else>>
+	<<goto_room GameManager "Ground">>
+	<<if $entered_office_inside == false>>
+		<<wait 2>>
+		<<play_dialogue_delay DialogueManager "Inside_Office">>
+	<<endif>>
+<<endif>>
+===
+
+title: Inside_Office
+---
+<<declare $entered_office_inside = false>>
+Ashe: This is fancy. Now ... how to get upstairs.
+<<set $entered_office_inside = true>>
+===
+
+title: Receptionist
+---
+<<start_character_conv CharacterManager "Ashe">>
+Receptionist: ...What do you want?
+Ashe: ... N-nothing. Just looking around.
+Receptionist: Is that so?
+Receptionist: Well, don't make a scene. 
+<<end_character_conv CharacterManager>>
+===
+
+title: To_First_Floor
+---
+Looks like I can sneak past here...
+	-> Try to sneak past
+		...
+		It worked!
+		<<goto_room GameManager "First Floor">>
+	-> Find another way through
+		... I'll look for another way
+===
+
+title: Locked_Door
+---
+... The door is locked.
+===
+
+title: Pick_Lock
+---
+This lock looks slightly loose. 
+Maybe I can pick the lock? 
+-> Try to pick the lock
+	<<play_minigame MinigameManager "Lockpick" "Lockpick_Success" "Lockpick_Fail">>
+-> Find another way upstairs
+===
+
+title: Lockpick_Success
+---
+I did it! 
+<<goto_room GameManager "Second Floor">>
+===
+
+title: Lockpick_Fail
+---
+...Shit. Someone's coming. 
+<<wait 2>>
+...
+Let me try that again. 
+<<play_minigame MinigameManager "Lockpick" "Lockpick_Success" "Lockpick_Fail">>
+===
+
+title: Locked_Door_Check_1
+---
+<<if $security_guard_present == false>>
+	<<declare $door_1_checked = false>>
+	<<declare $doors_checked = 0>>
+	...This door is locked. 
+	<<if $door_1_checked == false>>
+		<<set $door_1_checked = true>>
+		<<set $doors_checked = $doors_checked + 1>>
+	<<endif>>
+	<<if $doors_checked >= 3>>
+		<<jump Security_Guard_Entrance>>
+	<<endif>>
+<<endif>>
+
+===
+
+title: Locked_Door_Check_2
+---
+<<if $security_guard_present == false>>
+	<<declare $door_2_checked = false>>
+	...This door is locked. 
+	<<if $door_2_checked == false>>
+		<<set $door_2_checked = true>>
+		<<set $doors_checked = $doors_checked + 1>>
+	<<endif>>
+	<<if $doors_checked >= 3>>
+		<<jump Security_Guard_Entrance>>
+	<<endif>>
+<<endif>>
+===
+
+title: Locked_Door_Check_3
+---
+<<if $security_guard_present == false>>
+	<<declare $door_3_checked = false>>
+	...This door is locked. 
+	<<if $door_3_checked == false>>
+		<<set $door_3_checked = true>>
+		<<set $doors_checked = $doors_checked + 1>>
+	<<endif>>
+	<<if $doors_checked >= 3>>
+		<<jump Security_Guard_Entrance>>
+	<<endif>>
+<<endif>>
+===
+
+title: Security_Guard_Entrance
+---
+<<declare $security_guard_present = false>>
+<<wait 1>>
+... What do I do now? 
+I can't pick the lock like last time. 
+...
+Shit, I think someone's coming
+<<start_character_conv CharacterManager "Ashe">>
+Security Guard: Yawn. No one comes around here anyway. I don't know why I have to be stationed up here.
+Security Guard: It's not like anyone has the security card except for me. 
+Ashe: ... 
+<<end_character_conv CharacterManager>>
+<<enable_object GameManager Security>>
+<<set $security_guard_present = true>>
+===
+
+title: Security_Guard
+---
+... He's not looking.
+I bet I can swipe the card. 
+-> Try take his card
+	... Here goes nothing
+	<<play_minigame MinigameManager "Steal" "Stole_Keys" "Steal_Fail">>
+	<<disable_object GameManager Security>>
+-> Decide against it
+	... This is such a dumb idea
+===
+
+title: Steal_Fail
+---
+I think he noticed me! 
+...
+<<wait 2>>
+Let me try that again. 
+<<play_minigame MinigameManager "Steal" "Stole_Keys" "Steal_Fail">>
+===
+title: Stole_Keys
+---
+<<obtain_evidence GameManager "Keycard">>
+You got the Security Keycard.
+... Gotta wait for him to leave. 
+...
+Time to use the card. 
+...
+It worked! 
+<<goto_room GameManager "Victor Office">>
+<<jump Inside_Victor_Office>>
+===
+
+title: Inside_Victor_Office
+---
+<<wait 2>>
+...
+I'm actually inside his office. Now let's see what I can find
+===
+
+title: Victor_PC_1
+---
+<<declare $seen_pc_1 = false>>
+<<if $seen_pc_1 ==false >>
+	<<if $seen_pc_2 == false>>
+		What's this?
+		He's been buying properties... but they're all empty. 
+	<<else>>
+		...
+		Even more properties listed here. This is insane. 
+	<<endif>>
+	<<set $seen_pc_1 = true>>
+<<else>>
+	...
+<<endif>>
+===
+
+title: Victor_PC_2
+---
+<<declare $seen_pc_2 = false>>
+<<if $seen_pc_2 ==false >>
+	<<if $seen_pc_1 == false>>
+		What's this?
+		He's been buying properties... but they're all empty. 
+	<<else>>
+		...
+		Even more properties listed here. This is insane. 
+	<<endif>>
+	<<set $seen_pc_2 = true>>
+<<else>>
+	...
+<<endif>>
+===
+
+title: Teddy_Case
+---
+<<show_evidence GameManager "Teddy Case">>
+These files... 
+They're about Dad! 
+...
+I can't believe this.
+<<obtain_evidence GameManager "Teddy Case">>
+<<hide_evidence GameManager>>
+You got Teddy's Case File.
+<<jump Pursuer>>
+===
+
+title: Pursuer
+---
+<<wait 1>>
+<<start_character_conv CharacterManager "Ashe">>
+Ashe: What the... Someone's messaging me
+Unknown: Hey. 
+Unknown: Don't think what you're doing is going unnoticed.
+Unknown: You shouldn't be sticking your nose into things you know nothing about. 
+Unknown: ... Especially if you want to keep your head. 
+Ashe: ...
+<<end_character_conv CharacterManager>>
+<<enable_object GameManager "Escape_Office">>
+===
+
+title: Attempt_Leave
+---
+<<start_character_conv CharacterManager "Ashe">>
+Ashe: ... I need to get out of here. 
+Ashe: ... What? The door is locked! 
+Ashe: ...I need help. Now. 
+ring...ring...
+Unknown: Who is this? 
+Ashe: ... This is Teddy's daughter. What can you tell me about Victor?
+Unknown: ...
+<<change_location GameManager "Winslow Building 2">>
 ===

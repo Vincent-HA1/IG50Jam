@@ -1691,7 +1691,7 @@ GameObject:
   - component: {fileID: 1328066972}
   m_Layer: 5
   m_Name: Bottle
-  m_TagString: Untagged
+  m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,0 +1,94 @@
+﻿title: Colleague_Call
+---
+<<start_character_conv CharacterManager "Ashe">>
+Ashe: ... I see. 
+Unknown: You need to get out of there Ashe. Try to get home befo-
+...thud.
+Ashe: Hello? Are you still there? 
+Ashe: ... Shit. What's going on? 
+<<end_character_conv CharacterManager>>
+I need to call Dad. 
+===
+
+title: Teddy_Call
+---
+<<declare $called_teddy = false>>
+<<if $called_teddy == false>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: ...Please pick up. 
+	...
+	Ashe: Dad! 
+	<<start_character_conv CharacterManager "Ashe" "Teddy">>
+	Teddy: Ashe! Where are you? I've been trying to call you for hours! 
+	Ashe: ... Dad. Please. Tell me the truth. Your leg ... It wasn't an accident was it?
+	Teddy: ... 
+	Teddy: So you know. ... Please don't do anything reckless Ashe.
+	Teddy: The people involved ... they can hurt us. Hurt you. I would never forgive myself if that were to happen.
+	Ashe: Dad! This ... 
+	Teddy: Pl-
+	...click
+	<<end_character_conv CharacterManager>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: Dad? My phone lost connection! 
+	<<play_sfx SoundManager phone>> 
+	Ashe: ... What's that sound? 
+	<<set $victor_calling = true>>
+	<<end_character_conv CharacterManager>>
+<<else>>
+	It's no use. My phone won't connect.
+<<endif>>
+===
+
+title: Victor_Call
+---
+<<declare $victor_calling = false>>
+<<declare $victor_called = false>>
+<<if $victor_calling == true and $victor_called == false>>
+	<<stop_sfx SoundManager>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Unknown: So you're the "mouse" scurrying around my office. How pleasing to make your acquaintance. 
+	Ashe: ...
+	Unknown: Unfortunately, I cannot be there in person. But I think we both know the ... circumstances you find yourself in. 
+	Ashe: You- ... What do you want? 
+	Unknown: ... I want to help you and your father. All I ask for is something simple in return. 
+	Ashe: ...
+	Unknown: Hand over the evidence you've managed to "acquire". And I will allow you both to relocate to one of my properties.
+	Ashe: ... And if I say no? 
+	Unknown: Well ... we both know that won't happen. Not with the state your poor father is in. 
+	Ashe: Why you-
+	...click
+	Ashe: ... 
+	<<set $victor_called = false>>
+	<<end_character_conv CharacterManager>>
+	<<jump Ashe_Decision>>
+<<endif>>
+===
+
+title: Ashe_Decision
+---
+... What do I do? 
+Dad. I-I don't know what to think. 
+-> Escape with the evidence
+	...
+	I won't let that bastard get away with this. 
+	<<show_cutscene DialogueManager 4>>
+-> Hand over the evidence
+	...
+	This is for the best. We can be happy. 
+	This is ... for dad. It is. 
+	<<show_cutscene DialogueManager 5>>
+===
+
+title: Ending_1
+---
+And they all lived happily ever after.
+<<end_game GameManager>>
+===
+
+title: Ending_2
+---
+And they all lived happily ever after.
+<<end_game GameManager>>
+===
+
+

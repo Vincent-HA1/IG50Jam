@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: 30d5c16d6ecca7f428f5ff4fcbd58b7f
   - enabled: 1
+    path: Assets/Scenes/Apartment.unity
+    guid: 6df2afca42c252d4e81a5ebc8a19e2c5
+  - enabled: 1
+    path: Assets/Scenes/Winslow Building.unity
+    guid: 28fca8f1e99047e429f6caa14e6fb270
+  - enabled: 1
+    path: Assets/Scenes/Winslow Building 2.unity
+    guid: 18d0c7a940538b54081c9b7f3b807507
+  - enabled: 1
     path: Assets/Scenes/Location1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

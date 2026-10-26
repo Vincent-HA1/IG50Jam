@@ -148,10 +148,16 @@ title: Teddy
 		Ashe: Dad. Wake up. We need to talk.
 		<<start_character_conv CharacterManager "Ashe" "Teddy">>
 		Teddy: A-ashe? Y-yawn. What did you want to talk about?
-		<<show_character_expression CharacterManager "Ashe" "angry">>
-		Ashe: Why didn't you tell me about the eviction! 
-		<<show_character_expression CharacterManager "Teddy" "sad">>
-		Teddy:...
+		-> React angrily
+			<<show_character_expression CharacterManager "Ashe" "angry">>
+			Ashe: Why didn't you tell me about the eviction! 
+			<<show_character_expression CharacterManager "Teddy" "sad">>
+			Teddy:...
+		-> Try to be calm
+			<<show_character_expression CharacterManager "Ashe" "sad">>
+			Ashe: Dad. ... We're being evicted?
+			<<show_character_expression CharacterManager "Teddy" "sad">>
+			Teddy:...
 		<<set $speak_to_teddy = true>>
 		<<end_character_conv CharacterManager>>
 		Ashe: I need to speak to Janet. Maybe she's being evicted too
@@ -182,7 +188,7 @@ title: Neighbour
 	<<start_character_conv CharacterManager "Ashe">>
 	Ashe: ... What do I have to lose? 
 	<<end_character_conv CharacterManager>>
-	<<change_location GameManager "Location1">>
+	<<change_location GameManager "Winslow Building">>
 <<endif>>
 ===
 

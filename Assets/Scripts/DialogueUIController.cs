@@ -40,7 +40,6 @@ public class DialogueUIController : MonoBehaviour
         if (cutsceneIndex >= cutscenes.Count || cutscenePlaying) return;
         cutscenePlaying = true;
         currentCutscene = cutscenes[cutsceneIndex];
-        print(cutsceneIndex);
         if (currentCutscene != null)
         {
             //Enable cutscene
@@ -60,6 +59,7 @@ public class DialogueUIController : MonoBehaviour
             yield return new WaitUntil(() => gameManager.fadedOut);
         }
         StartCutscene();
+        yield return null;
         yield return new WaitUntil(() => GameManager.cannotAct == false);
         //run dialogue
         DialoguePlay(currentCutscene.dialogueNodeTitle);
@@ -134,6 +134,7 @@ public class DialogueUIController : MonoBehaviour
     private void Start()
     {
         dialogueIsPlaying = false;
+        print(dialogueIsPlaying);
     }
 
 

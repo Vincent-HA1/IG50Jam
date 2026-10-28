@@ -1146,6 +1146,10 @@ PrefabInstance:
       value: Office_Telephone
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: musicFiles.Array.data[0].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: 5edb7ffea895e4846ab27dca2e176e8a, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[0].soundName
       value: Act_1
       objectReference: {fileID: 0}
@@ -1216,7 +1220,7 @@ PrefabInstance:
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[0].audioLoopFile
       value: 
-      objectReference: {fileID: 8300000, guid: 24ee5d44a081f4b4e83d3b93240d4178, type: 3}
+      objectReference: {fileID: 8300000, guid: 346fb42e5e766794b8a689163d5b25af, type: 3}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[2].audioLoopFile
       value: 

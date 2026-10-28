@@ -1019,7 +1019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.size
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.data[2].loop
@@ -1039,11 +1039,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[2].loop
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: musicFiles.Array.data[3].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: musicFiles.Array.data[4].loop
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[6].loop
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[7].loop
@@ -1199,15 +1207,15 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 301984ebd0f4c8e4fb73b20159eb70a6, type: 3}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[6].soundName
-      value: Victors_Theme_Section1
+      value: Victors_Theme_Sections1and2
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[7].audioFile
       value: 
-      objectReference: {fileID: 8300000, guid: 27d6b4f1610a07042a1fb6bd6a2f6307, type: 3}
+      objectReference: {fileID: 8300000, guid: 3af2c2191b24f6143961aeb6a51a4ed3, type: 3}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[7].soundName
-      value: Victors_Theme_Section2
+      value: Victors_Theme_Section3
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[8].audioFile
@@ -1240,7 +1248,11 @@ PrefabInstance:
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[6].audioLoopFile
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 27d6b4f1610a07042a1fb6bd6a2f6307, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: musicFiles.Array.data[7].audioLoopFile
+      value: 
+      objectReference: {fileID: 8300000, guid: 03c6e687269881741ba79235de19f0b1, type: 3}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[8].audioLoopFile
       value: 

@@ -383,6 +383,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 685115731}
   m_CullTransparentMesh: 1
+--- !u!82 &740804245 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7230092499018519559, guid: 2d880b7d0768d6244a5363c678e3c3a5, type: 3}
+  m_PrefabInstance: {fileID: 6928627425891920612}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1103261434 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6919116968864150019, guid: 96408ab19d8714c4986129ac2443ec9f, type: 3}
@@ -1014,12 +1019,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 170002809}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: musicLoopSource
+      value: 
+      objectReference: {fileID: 740804245}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.size
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
-      propertyPath: musicFiles.Array.size
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.data[2].loop
@@ -1035,10 +1040,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.data[5].loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
-      propertyPath: musicFiles.Array.data[2].loop
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
@@ -1063,10 +1064,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.data[5].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
-      propertyPath: musicFiles.Array.data[2].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
@@ -1110,17 +1107,9 @@ PrefabInstance:
       value: Office_Telephone
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
-      propertyPath: musicFiles.Array.data[2].audioFile
+      propertyPath: musicFiles.Array.data[1].audioLoopFile
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
-      propertyPath: musicFiles.Array.data[2].soundName
-      value: office
-      objectReference: {fileID: 0}
-    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
-      propertyPath: musicFiles.Array.data[0].audioLoopFile
-      value: 
-      objectReference: {fileID: 8300000, guid: 24ee5d44a081f4b4e83d3b93240d4178, type: 3}
+      objectReference: {fileID: 8300000, guid: 301633b51963c274c8e89e309b07230b, type: 3}
     - target: {fileID: 7603672208978628994, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

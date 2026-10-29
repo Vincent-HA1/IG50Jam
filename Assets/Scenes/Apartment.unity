@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.007843138}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.05882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.007843138}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.05882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1180,6 +1180,10 @@ PrefabInstance:
       propertyPath: musicSource
       value: 
       objectReference: {fileID: 1734527705}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: musicLoopSource
+      value: 
+      objectReference: {fileID: 1734527706}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[5].loop
       value: 1
@@ -2345,6 +2349,11 @@ AudioSource:
 --- !u!82 &1734527705 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 3027951082205048594, guid: 2d880b7d0768d6244a5363c678e3c3a5, type: 3}
+  m_PrefabInstance: {fileID: 1734527703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1734527706 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7230092499018519559, guid: 2d880b7d0768d6244a5363c678e3c3a5, type: 3}
   m_PrefabInstance: {fileID: 1734527703}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1936438948

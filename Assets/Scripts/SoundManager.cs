@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
+using static Unity.VisualScripting.Member;
 
 public class SoundManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioSource musicLoopSource;
     [SerializeField] AudioSource sfxSource;
     [SerializeField] List<Sound> musicFiles;
     [SerializeField] List<Sound> sfxFiles;
@@ -76,10 +78,24 @@ public class SoundManager : MonoBehaviour
     {
         // Fade out previous audio
         if (audioSource.isPlaying)
+        {
+            if(audioSource == musicSource)
+            {
+                musicLoopSource.Stop();
+            }
             yield return FadeVolume(
                 audioSource, 0f, fadeOutDuration);
+        }
+        else if(audioSource == musicSource)
+        {
+            if (musicLoopSource.isPlaying)
+            {
+                yield return FadeVolume(
+                musicLoopSource, 0f, fadeOutDuration);
+            }
+        }
 
-        audioSource.Stop();
+            audioSource.Stop();
 
         bool hasSeparateLoop =
             sound.loop && sound.audioLoopFile != null;
@@ -91,22 +107,18 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
 
         float elapsed = 0f;
-        bool waitingForLoop = hasSeparateLoop;
+        //bool waitingForLoop = hasSeparateLoop;
 
-        // Fade in, and wait for the intro to finish
-        // if a separate looping clip is assigned.
-        while (elapsed < fadeInDuration || waitingForLoop)
+        if (hasSeparateLoop)
         {
-            // Once the intro ends, begin the loop
-            if (waitingForLoop && !audioSource.isPlaying)
-            {
-                audioSource.clip = sound.audioLoopFile;
-                audioSource.loop = true;
-                audioSource.Play();
-
-                waitingForLoop = false;
-            }
-
+            double start = AudioSettings.dspTime + 0.1f;
+            musicLoopSource.clip = sound.audioLoopFile;
+            musicLoopSource.PlayScheduled(start + sound.audioFile.length);
+            musicLoopSource.volume = sound.volume;
+            musicLoopSource.loop = true;
+        }
+        while (elapsed < fadeInDuration)
+        {
             elapsed += Time.unscaledDeltaTime;
 
             float t = fadeInDuration <= 0f
@@ -120,6 +132,33 @@ public class SoundManager : MonoBehaviour
         }
 
         audioSource.volume = sound.volume;
+        // Fade in, and wait for the intro to finish
+        // if a separate looping clip is assigned.
+        //while (elapsed < fadeInDuration || waitingForLoop)
+        //{
+        //    // Once the intro ends, begin the loop
+        //    if (waitingForLoop && !audioSource.isPlaying)
+        //    {
+        //        audioSource.clip = sound.audioLoopFile;
+        //        audioSource.loop = true;
+        //        audioSource.Play();
+
+        //        waitingForLoop = false;
+        //    }
+
+        //    elapsed += Time.unscaledDeltaTime;
+
+        //    float t = fadeInDuration <= 0f
+        //        ? 1f
+        //        : Mathf.Clamp01(elapsed / fadeInDuration);
+
+        //    audioSource.volume = Mathf.Lerp(
+        //        0f, sound.volume, t);
+
+        //    yield return null;
+        //}
+
+        //audioSource.volume = sound.volume;
     }
 
     [YarnCommand("stop_music")]
@@ -128,9 +167,9 @@ public class SoundManager : MonoBehaviour
         if (musicFadeCoroutine != null)
             StopCoroutine(musicFadeCoroutine);
 
-        musicFadeCoroutine = StartCoroutine(
-            FadeOutAndStop(musicSource)
-        );
+        musicFadeCoroutine = musicSource.isPlaying ? 
+            StartCoroutine(FadeOutAndStop(musicSource))
+            : StartCoroutine(FadeOutAndStop(musicLoopSource));
     }
 
     [YarnCommand("stop_sfx")]
@@ -147,6 +186,11 @@ public class SoundManager : MonoBehaviour
     private IEnumerator FadeOutAndStop(
         AudioSource audioSource)
     {
+        if(audioSource == musicSource)
+        {
+            //stop loop source immediately to prevent scheduling
+            musicLoopSource.Stop();
+        }
         yield return FadeVolume(
             audioSource, 0f, fadeOutDuration);
 

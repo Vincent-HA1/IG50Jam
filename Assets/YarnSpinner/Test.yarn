@@ -121,7 +121,7 @@ The day had come to an end
 title: Sound
 ---
 I am going to play a song.
-<<play_music SoundManager act_1>> 
+<<play_music SoundManager act_2>> 
 See?
 Now I am going to change the song.
 <<play_music SoundManager sneak>> 

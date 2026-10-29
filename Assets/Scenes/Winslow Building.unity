@@ -1032,6 +1032,10 @@ PrefabInstance:
       propertyPath: fadeOutDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: musicLoopSource
+      value: 
+      objectReference: {fileID: 1734527707}
     - target: {fileID: 6968095377361030745, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: m_text
       value: 'Time: 99.99'
@@ -1705,6 +1709,11 @@ AudioSource:
 --- !u!20 &1734527706 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1688132302054956419, guid: 2d880b7d0768d6244a5363c678e3c3a5, type: 3}
+  m_PrefabInstance: {fileID: 1734527703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1734527707 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7230092499018519559, guid: 2d880b7d0768d6244a5363c678e3c3a5, type: 3}
   m_PrefabInstance: {fileID: 1734527703}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1829474139

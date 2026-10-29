@@ -11,6 +11,7 @@ public class LockpickManager : Minigame
     [SerializeField] TMPro.TextMeshProUGUI timerText;
     [SerializeField] Transform targetSectionsParent;
     [SerializeField] GameObject targetSectionPrefab;
+    [SerializeField] SoundManager soundManager;
 
     [SerializeField] float rotateSpeed = 20f;
     [SerializeField] int minTargetSections = 4;
@@ -110,7 +111,9 @@ public class LockpickManager : Minigame
     {
         targetSection.SetActive(false);
         targetSectionsHit += 1;
-        if(targetSectionsHit >= targetSectionsNo)
+        string sfxName = $"lockpick_{Mathf.Clamp(targetSectionsHit, 1, 5)}";
+        soundManager.PlaySFXOneShot(sfxName);
+        if (targetSectionsHit >= targetSectionsNo)
         {
             //If Hit all targets
             //End Minigame

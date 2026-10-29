@@ -146,8 +146,11 @@ title: Medicine_Bottle
 <<declare $checked_box = false>>
 <<if $checked_box == false>>
 	She crouches down, reaching beneath Teddy’s bed for the bottle that has rolled out of sight, when her hand catches on the edge of a cardboard box. She drags it into the light.
-	<<show_evidence GameManager "Case Files">>
+	<<show_evidence GameManager "Case Files Box Closed">>
 	The box still looks new, though the corners are softened with wear, and a thick layer of dust coats the lid. 
+	<<show_evidence GameManager "Case Files Box Open">>
+	She opens the box.
+	<<show_evidence GameManager "Case Files">>
 	Stacked on top are several envelopes, all bearing the same unmistakable lettering as the eviction notice she found beneath the front door. 
 	Ashe’s stomach sinks. She sets them aside without opening them, already dreading what she might find.
 	The box beneath them is heavier than she expects. Inside are folders of old case files, their contents yellowed and disorganised. She flicks through them idly at first, until a name catches her eye.
@@ -192,6 +195,7 @@ title: Teddy
 		He makes a vague noise without opening his eyes.
 
 		Ashe: Dad, wake up.
+		<<disable_object GameManager Teddy_Sleep>>
 		<<start_character_conv CharacterManager "Ashe" "Teddy">>
 		Teddy: What?
 
@@ -241,7 +245,7 @@ title: Teddy
 		Teddy: How long what?
 
 		Ashe: How long have you known about the eviction?
-
+		<<show_character_expression CharacterManager "Teddy" "sad">>
 		He rubs a hand over his face. 
 
 		Teddy: I was going to sort it out.
@@ -251,7 +255,7 @@ title: Teddy
 		Teddy: When I could.
 		<<show_character_expression CharacterManager "Ashe" "angry">>
 		Ashe: With what money? Her voice rises before she can stop it. We can barely afford anything, and now we're apparently losing the flat, and you've been sitting on all of this like it's nothing!
-
+		<<show_character_expression CharacterManager "Teddy" "default">>
 		Teddy: Keep your voice down.
 		<<show_character_expression CharacterManager "Ashe" "sad">>
 		Ashe: Why? So the neighbours don't hear? So nobody finds out what a mess everything is?
@@ -267,9 +271,9 @@ title: Teddy
 		Teddy: You think I don't know things are bad? You think I need you standing here reminding me?
 
 		Ashe: Then do something about it!
-
-		The words hang between them.
 		<<show_character_expression CharacterManager "Teddy" "sad">>
+		The words hang between them.
+		<<show_character_expression CharacterManager "Teddy" "angry">>
 		His face hardens. 
 
 		Teddy: You have no idea what you're talking about.
@@ -328,6 +332,7 @@ title: Teddy
 		A lie.
 
 		She drops the folder onto the couch and turns towards the front door.
+		<<show_character_expression CharacterManager "Teddy" "angry">>
 
 		Teddy: Ashe, where are you going?
 
@@ -401,4 +406,32 @@ title: Neighbour
 	<<end_character_conv CharacterManager>>
 	<<change_location GameManager "Winslow Building">>
 ===
+
+//Props
+
+title: TV
+---
+A dusty old TV. It looks like it hasn't been used for a while.
+===
+title: Sofa
+---
+Teddy lies on the sofa fast asleep. 
+===
+title: Bookshelf
+---
+The shelf is filled with Teddy and Ashe's favourites.
+===
+title: Cabinet
+---
+A creaky old cabinet. The handles are falling off. 
+===
+title: Shelves
+---
+A small shelf filled with memorabilia. On top is a photo of Teddy and Ashe.
+===
+title: Wardrobe
+---
+The wardrobe is sparse, with a few lonely garments hanging from the rail.
+===
+
 

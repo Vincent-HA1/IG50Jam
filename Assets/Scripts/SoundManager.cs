@@ -52,7 +52,7 @@ public class SoundManager : MonoBehaviour
     {
         Sound soundToPlay = FindSFXFile(soundName);
         if (soundToPlay == null) return;
-
+        sfxSource.volume = soundToPlay.volume;
         sfxSource.PlayOneShot(
             soundToPlay.audioFile,
             soundToPlay.volume

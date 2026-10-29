@@ -30,6 +30,7 @@ title: Enter_Office
 	<<show_character_expression CharacterManager "Ashe" "shout">>
 	Ashe: I’m not doing anything stupid! ... I’m just trying to fix something for once.
 	There’s a pause.
+	<<show_character_expression CharacterManager "Teddy" "sad">>
 	Teddy: Ashe, please. Just come home.
 	<<show_character_expression CharacterManager "Ashe" "default">>
 	For a moment, guilt threatens to get the better of her. Teddy has enough to worry about without her adding to it, but she can’t bear the thought of returning home empty-handed.
@@ -255,4 +256,18 @@ title: Call_Colleague
 <<else>>
 	It's no use. It won't turn on.
 <<endif>>
+===
+
+//Office props
+title: Painting
+---
+An abstract painting by a renowned artist. It seems to be kept in pristine condition.
+===
+title: Liquor
+---
+An opened bottle of liquor. There seems to be a strange smell emanating from it.
+===
+title: Clock
+---
+A curiously shaped clock. Its parts move with a hypnotic rhythm.
 ===

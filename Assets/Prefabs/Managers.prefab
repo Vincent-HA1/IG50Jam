@@ -695,8 +695,9 @@ MonoBehaviour:
   pointerArrow: {fileID: 5251757729712387566}
   timerText: {fileID: 6968095377361030745}
   targetSectionsParent: {fileID: 5784422676992786020}
-  targetSectionPrefab: {fileID: 5960939304546422453, guid: 44e07b43dbbde6f439d41e791ffc676a, type: 3}
-  rotateSpeed: 80
+  targetSectionPrefab: {fileID: 5960939304546422453, guid: 15fdf1acd4a384948805893487a2c453, type: 3}
+  soundManager: {fileID: 6913276650571681906}
+  rotateSpeed: 100
   minTargetSections: 4
   maxTargetSections: 6
   minAngleDiff: 10
@@ -870,7 +871,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_SizeDelta: {x: 800, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4509762636409404701
 CanvasRenderer:
@@ -2319,6 +2320,31 @@ MonoBehaviour:
     audioLoopFile: {fileID: 0}
     volume: 0.6
     loop: 1
+  - soundName: lockpick_1
+    audioFile: {fileID: 8300000, guid: c0e518ff37d808a4a9f64853e2004c1b, type: 3}
+    audioLoopFile: {fileID: 0}
+    volume: 0.6
+    loop: 0
+  - soundName: lockpick_2
+    audioFile: {fileID: 8300000, guid: 1d2b3942c6ce93e43b1b789655121b77, type: 3}
+    audioLoopFile: {fileID: 0}
+    volume: 0.6
+    loop: 0
+  - soundName: lockpick_3
+    audioFile: {fileID: 8300000, guid: a4fe81a9b03fc494b913cc61f5f863f2, type: 3}
+    audioLoopFile: {fileID: 0}
+    volume: 0.6
+    loop: 0
+  - soundName: lockpick_4
+    audioFile: {fileID: 8300000, guid: f99b98c29bef4ba4b8cd77bc2f16a902, type: 3}
+    audioLoopFile: {fileID: 0}
+    volume: 0.6
+    loop: 0
+  - soundName: lockpick_5
+    audioFile: {fileID: 8300000, guid: 02943043c301ffb49a58800cfd5bff18, type: 3}
+    audioLoopFile: {fileID: 0}
+    volume: 0.6
+    loop: 0
   fadeInDuration: 0.5
   fadeOutDuration: 0.5
 --- !u!1001 &489577437071254783

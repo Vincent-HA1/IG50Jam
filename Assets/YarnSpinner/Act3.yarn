@@ -84,6 +84,31 @@ title: Ashe_Decision
 <<play_music SoundManager Victor_2>> 
 What will you do?
 -> Reject his offer
+	As dawn approaches, Ashe stands alone in Victor Winslow’s office, the first hints of sunlight spilling across the scattered documents on his desk. 
+	Her bag is packed with evidence, her phone is filled with photographs, and her mind is racing with everything she has uncovered.
+	Victor has offered her a way out. A new home for her and Teddy, financial security, and the promise that they will never have to worry about eviction again. 
+	All she has to do is hand over the evidence and walk away.
+	For a moment, Ashe considers it. She thinks of her father, of the months he has struggled since his accident, and of how desperately they both need something to go right for once.
+	Then she remembers her neighbour, the eviction notice sitting on her table, and the countless other families who have nowhere else to go.
+	How can she accept a safe home for herself while leaving everyone else to suffer?
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe: No more suffering.
+	With trembling fingers, Ashe begins dragging copies of the evidence to journalists, local authorities, and the residents affected by Victor’s schemes through his very own computer. 
+	Property records
+	Falsified documents.
+	Suppressed investigations.
+	Everything she has gathered is released into the open.
+	Victor: Ashe, don’t do this
+	Victor: I’m offering you and your father a safe home. You could walk away from all of this.
+	<<show_character_expression CharacterManager "Ashe" "shout">>
+	Ashe: And what about everyone else?
+	Victor: What about them?
+	Ashe: The families you forced out of their homes. The people who lost everything because you wanted another piece of land to make money from. What happens to them?
+	Victor: You can’t save everyone.
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe: Maybe not, but I can stop you from hiding the truth.
+	Victor: You’ll regret this.
+	Ashe: Better that than becoming part of your corruption.
 	<<end_character_conv CharacterManager>>
 	<<show_cutscene DialogueManager 4>>
 -> Hand over the evidence

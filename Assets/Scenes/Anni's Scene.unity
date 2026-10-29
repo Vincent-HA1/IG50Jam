@@ -1015,7 +1015,7 @@ PrefabInstance:
       objectReference: {fileID: 170002809}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.size
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.size
@@ -1036,6 +1036,10 @@ PrefabInstance:
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.data[5].loop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[6].loop
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[2].loop
@@ -1083,6 +1087,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.data[5].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[6].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[7].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[8].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[9].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[10].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
@@ -1152,6 +1176,46 @@ PrefabInstance:
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: sfxFiles.Array.data[5].soundName
       value: Office_Telephone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[6].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: a309b90993403284989f37af178f0c4e, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[6].soundName
+      value: LockPicking_Move1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[7].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: 7615e76e185bdda4896300de050f4abe, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[7].soundName
+      value: LockPicking_Move2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[8].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: 28ecc0d214cd7c2409d7d316d54d0073, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[8].soundName
+      value: LockPicking_Move3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[9].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: d961e07f9a745ab46b9b96832e54ccbc, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[9].soundName
+      value: LockPicking_Move4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[10].audioFile
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ff9ddca11e948b438d3c1476872e9a0, type: 3}
+    - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
+      propertyPath: sfxFiles.Array.data[10].soundName
+      value: LockPicking_Move5
       objectReference: {fileID: 0}
     - target: {fileID: 6913276650571681906, guid: 1763ae9c4c211104dbcc5d7cedafa10c, type: 3}
       propertyPath: musicFiles.Array.data[0].audioFile

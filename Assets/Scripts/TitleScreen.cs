@@ -15,6 +15,7 @@ public class TitleScreen : MonoBehaviour
     SaveClass loadedSaveFile;
 
     EventSystem eventSystem;
+    bool movingToScene = false;
 
     private void Awake()
     {
@@ -25,10 +26,22 @@ public class TitleScreen : MonoBehaviour
     void Start()
     {
         //Check for save file
+        //REMOVING SAVING, SO JUST NEW GAME FOR NOW
+        /*
         SaveClass saveFile = SaveSystem.LoadGame();
         continueButton.gameObject.SetActive(saveFile != null);
         loadedSaveFile = saveFile;
+        */
+        movingToScene = true;
         StartCoroutine(WaitForFade());
+    }
+
+    private void Update()
+    {
+        if (!movingToScene && Input.anyKeyDown)
+        {
+            NewGame();
+        }
     }
 
     IEnumerator WaitForFade()
@@ -44,6 +57,7 @@ public class TitleScreen : MonoBehaviour
         {
             eventSystem.SetSelectedGameObject(newGame.gameObject);
         }
+        movingToScene = false;
     }
 
 
@@ -67,6 +81,7 @@ public class TitleScreen : MonoBehaviour
 
     IEnumerator GoToSceneAfterFade(string sceneName)
     {
+        movingToScene = true;
         SceneFadeAnimator.SetTrigger("FadeOut");
         yield return new WaitForNextFrameUnit();
         yield return new WaitUntil(() => SceneFadeAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1);
@@ -76,6 +91,7 @@ public class TitleScreen : MonoBehaviour
 
     IEnumerator GoToSceneAfterFade(int buildIndex)
     {
+        movingToScene = true;
         SceneFadeAnimator.SetTrigger("FadeOut");
         yield return new WaitForNextFrameUnit();
         yield return new WaitUntil(() => SceneFadeAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1);

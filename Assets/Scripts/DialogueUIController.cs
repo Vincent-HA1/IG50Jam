@@ -38,7 +38,6 @@ public class DialogueUIController : MonoBehaviour
     {
         //show cutscene by enabling object and playing through the images after each text
         if (cutsceneIndex >= cutscenes.Count || cutscenePlaying) return;
-        cutscenePlaying = true;
         currentCutscene = cutscenes[cutsceneIndex];
         if (currentCutscene != null)
         {
@@ -130,22 +129,29 @@ public class DialogueUIController : MonoBehaviour
         DialoguePlay(nodeTitle);
     }
 
-
+    private void Awake()
+    {
+        runner.Stop();
+    }
     private void Start()
     {
         dialogueIsPlaying = false;
-        print(dialogueIsPlaying);
     }
 
+    private void Update()
+    {
+    }
 
     void StartCutscene()
     {
+        cutscenePlaying = true;
         //Need to scene fade out and then in
         currentCutsceneImageIndex = 0;
         cutsceneImage.sprite = currentCutscene.cutsceneImages[currentCutsceneImageIndex];
         if(currentCutscene.cutsceneImages.Count > 1) nextCutsceneImage.sprite = currentCutscene.cutsceneImages[currentCutsceneImageIndex + 1];
         nextCutsceneImage.color = transparentColor;
         cutsceneCanvas.SetActive(true);
+        print("started cutscene");
 
     }
 

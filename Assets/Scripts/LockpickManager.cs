@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +39,7 @@ public class LockpickManager : Minigame
         minigameActive = true;
         DeleteTargetSections();
         timer = duration;
-        sectionAngleOffset = targetSectionPrefab.GetComponent<Image>().fillAmount * 360;
+        sectionAngleOffset = 35;
         targetSectionsNo = UnityEngine.Random.Range(minTargetSections, maxTargetSections + 1);
         float angle = 360 / (float)targetSectionsNo;
         //Create stuff
@@ -49,10 +47,12 @@ public class LockpickManager : Minigame
         {
             float angleTotal = angle * i + UnityEngine.Random.Range(minAngleDiff, maxAngleDiff);
             GameObject section = Instantiate(targetSectionPrefab, targetSectionsParent);
-            section.transform.rotation = Quaternion.Euler(0, 0, -angleTotal);
+            section.transform.RotateAround(lockCircle.transform.position, Vector3.forward, -angleTotal);
+            //section.transform.rotation = Quaternion.Euler(0, 0, -angleTotal);
             TargetSection newSection = new TargetSection(section, angleTotal);
-            newSection.angleBoundMin = angleTotal;
-            newSection.angleBoundMax = angleTotal + sectionAngleOffset;
+            newSection.angleBoundMin = angleTotal - sectionAngleOffset/2;
+            newSection.angleBoundMax = angleTotal + sectionAngleOffset/2;
+            print($"{angleTotal}, {newSection.angleBoundMax}");
             targetSections.Add(newSection);
         }
     }
@@ -79,7 +79,7 @@ public class LockpickManager : Minigame
 
     void CheckTimer()
     {
-        timerText.text = String.Format("{0:0.00}", timer);
+        timerText.text = $"Time: {String.Format("{0:0.00}", timer)}";
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
@@ -92,13 +92,15 @@ public class LockpickManager : Minigame
     void CompareToSections()
     {
         float angleCheck = Mathf.Repeat(
-            (pointerArrow.transform.eulerAngles.z - 270) * -1,
+            (pointerArrow.transform.eulerAngles.z) * -1,
             360f
         );
         foreach (TargetSection targetSection in targetSections)
         {
             if (targetSection.WithinBounds(angleCheck))
             {
+                print(angleCheck);
+                print(targetSection.angleBoundMax);
                 //Hit target
                 HitTarget(targetSection.targetSection);
             }

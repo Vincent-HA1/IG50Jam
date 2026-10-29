@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] bool playCutsceneOnStart = false;
+    [SerializeField] bool playDialogueOnStart = false;
     [SerializeField] int indexOfCutsceneToPlay;
+    [SerializeField] string dialogueNode;
 
     List<Evidence> inventory = new List<Evidence>();
 
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         //Have a dictionary to map evidence name to evidence files
         Evidence evidenceToShow = allEvidence.Find(evidence => evidence.evidenceName == evidenceName);
+        print(evidenceToShow);
         if (evidenceToShow != null)
         {
             itemsCanvas.SetActive(true);
@@ -193,7 +196,12 @@ public class GameManager : MonoBehaviour
         if (playCutsceneOnStart)
         {
             fadedOut = true; //already faded out when scene starts
+            cannotAct = false;
             dialogueController.PlayCutscene(indexOfCutsceneToPlay);
+        }
+        else if (playDialogueOnStart)
+        {
+            dialogueController.DialoguePlay(dialogueNode);
         }
         else
         {

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9087266aa737a4b488842c5cdfc04d9d, type: 3}
+  m_Name: Teddy Call Ashe
+  m_EditorClassIdentifier: 
+  evidenceName: Teddy Call
+  description: A list of all the buildings purchased recently by the company
+  evidenceIcon: {fileID: 21300000, guid: be792496140d6be42b5a1f1343d8c34b, type: 3}
+  evidenceFull: {fileID: 21300000, guid: 3f4e28cf1299fca47a9e20ecb1f12e00, type: 3}

@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
@@ -42,7 +39,7 @@ public class HUDManager : MonoBehaviour
         }
 
         //Pause Menu
-        if (!GameManager.cannotAct && !DialogueUIController.dialogueIsPlaying && Input.GetKeyDown(KeyCode.Escape))
+        if (!GameManager.cannotAct && !DialogueUIController.dialogueIsPlaying && Input.GetKeyDown(KeyCode.P))
         {
             if (gamePaused)
             {

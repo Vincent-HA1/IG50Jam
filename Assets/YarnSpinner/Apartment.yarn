@@ -5,13 +5,15 @@
 <<show_cutscene DialogueManager 0>>
 The bathroom, cramped. 
 
-The overhead light flickered intermittently, casting a sickly yellow glow across cracked white tiles. Ashe stands before the porcelain sink, shoulders slumped, hands resting against the edges with a toothbrush between her fingers as the sound of running water fills the air.
+The overhead light flickered intermittently, casting a sickly yellow glow across cracked white tiles. 
+Ashe stands before the porcelain sink, shoulders slumped, hands resting against the edges with a toothbrush between her fingers as the sound of running water fills the air.
 
 Her gaze is fixed on her reflection in the mirror, though there is little focus in her eyes. Dark circles shadow them, and her expression is drawn with exhaustion, her lips resting in a faint, unhappy line.
 
 She has been standing there for some time, too tired to move and too lost in thought to look away. Her mind is pushing unwanted memories into her skull about her father.
 
-Teddy. A Police Officer. A professional rule-follower, an occasional terrible-joke enthusiast, and the sort of man who thought a uniform could fix just about anything. He used to run towards danger while everyone else ran away.
+Teddy. A Police Officer. A professional rule-follower, an occasional terrible-joke enthusiast, and the sort of man who thought a uniform could fix just about anything. 
+He used to run towards danger while everyone else ran away.
 
 Then came the accident.
 
@@ -26,7 +28,7 @@ Teddy staring at the space where his leg used to be.
 The urge to say something comforting, but Ashe's emotional support software had crashed. So she stood there, silent and frozen in time.
 
 The doctors told Ashe how lucky she was that he survived.
-
+<<next_cutscene_image DialogueManager>>
 Ashe: Lucky.
 That's what everyone called it. As if Teddy losing a leg was an acceptable trade-off for staying alive.
 Ashe: People love saying the right things when they don't have to live with the aftermath.
@@ -36,7 +38,7 @@ A heavy sigh.
 A splash of cold water over her face. 
 <<stop_sfx SoundManager>>
 The hope that it'll wash away the thoughts along with the toothpaste.
-<<play_dialogue_delay DialogueManager Ashe_1>>
+<<play_dialogue_delay DialogueManager Enter_Living_Room>>
 ===
 
 title: Bathroom_Test
@@ -50,7 +52,6 @@ title: Ashe_1
 ---
 <<start_character_conv CharacterManager "Ashe">>
 Ashe: ...
-<<show_character_expression CharacterManager "Ashe" "sad">>
 Ashe: I should go wake up Dad.
 <<end_character_conv CharacterManager>>
 ===
@@ -59,16 +60,20 @@ title: Enter_Living_Room
 ---
 <<if $seen_eviction == false>>
 	<<start_character_conv CharacterManager "Ashe">>
-	Ashe: What's that under the door? 
+	Ashe: ... What's that sticking out of the door?
 	<<block_travel GameManager>>
 	<<end_character_conv CharacterManager>>
+<<else>>
+	<<if $checked_box == true and $speak_to_teddy == false>>
+		<<jump Teddy>>
+	<<endif>>
 <<endif>>
 ===
 
 title: Go_To_Neighbour
 ---
 <<if $speak_to_teddy == false>>
-	I need to go talk to Dad.
+	... Not the time right now.
 <<else>>
 	<<goto_room GameManager Neighbours>>
 	<<wait 2>>
@@ -80,11 +85,31 @@ title: Eviction_Under_Door
 ---
 <<declare $seen_eviction = false>>
 <<if $seen_eviction == false>>
+	The corner of a folded envelope sticks out from beneath the front door. 
+	She crouches and pulls it free, unfolding it carefully to avoid making a noise.
 	<<start_character_conv CharacterManager "Ashe">>
-	Ashe: What the...
+	Ashe: An Eviction Notice?
+	<<show_evidence GameManager "Eviction Letter">>
+	Her eyes move over the words, then back to the top of the page, as if reading it a second time might somehow change what it says. The paper trembles slightly between her fingers.
+	Behind her, her father sleeps on the couch, one arm hanging over the edge, his face slack with exhaustion. 
+	The television murmurs in the background, washing the dim living room in the pale morning light.
+
+	She glances at him, waiting for him to stir. He doesn't.
 	<<show_character_expression CharacterManager "Ashe" "sad">>
-	Ashe: We're getting ... evicted?
-	Ashe: ...
+	For a moment, she remains crouched by the door, the notice resting against her knees. Her expression tightens as the reality of the situation settles in. 
+	She presses her lips together, folds the paper along its original creases and slips it into her pocket.
+	<<hide_evidence GameManager>>
+	<<show_character_expression CharacterManager "Ashe" "default">>
+	Then she stands and looks around the apartment\: the worn carpet, the peeling wallpaper, the familiar clutter that has always made the place feel like home, despite everything.
+
+	Her father shifts in his sleep, muttering something unintelligible.
+
+	She turns toward him, the eviction notice heavy in her pocket, and quietly closes her eyes. There is no point waking him. 
+
+	Not yet, not whilst she needs to grab his medication from his room. The one he just refuses to use now.
+	<<hide_evidence GameManager>>
+	<<obtain_evidence GameManager "Eviction Letter">>
+	You got Eviction Letter. 
 	<<set $seen_eviction = true>>
 	<<allow_travel GameManager>>
 <<else>>
@@ -98,9 +123,14 @@ title: Enter_Teddy_Room
 ---
 <<declare $entered_teddy_room = false>>
 <<if $entered_teddy_room == false>>
+	She absentmindedly reaches out for the bottle.
 	...thud
-	Gotta pick up the bottle.
+	<<show_evidence GameManager "Pill Bottle">>
+	The medication bottle slips from Ashe’s fingers and hits the floor, scattering a few pills across the carpet.
+	Ashe: ...
 	<<set $entered_teddy_room = true>>
+	<<hide_evidence GameManager>>
+	<<enable_object GameManager Bottle>>
 <<endif>>
 ===
 
@@ -113,26 +143,37 @@ title: Block_Leave
 
 title: Medicine_Bottle
 ---
-...
-I'm going to have to pick them all up later.
-
-===
-
-title: Examine_Box
----
 <<declare $checked_box = false>>
 <<if $checked_box == false>>
-	What's this? 
+	She crouches down, reaching beneath Teddy’s bed for the bottle that has rolled out of sight, when her hand catches on the edge of a cardboard box. She drags it into the light.
 	<<show_evidence GameManager "Case Files">>
-	Case files?
-	...
-	I can't believe Dad hid this from me.
+	The box still looks new, though the corners are softened with wear, and a thick layer of dust coats the lid. 
+	Stacked on top are several envelopes, all bearing the same unmistakable lettering as the eviction notice she found beneath the front door. 
+	Ashe’s stomach sinks. She sets them aside without opening them, already dreading what she might find.
+	The box beneath them is heavier than she expects. Inside are folders of old case files, their contents yellowed and disorganised. She flicks through them idly at first, until a name catches her eye.
+	Ashe: Victor Winslow.
+	She stops.
+
+	The name feels familiar, though she can't immediately place why. She pulls the folder free and begins reading, her brows furrowing as she pieces together the details of her father's accident. 
+	There are photographs, witness statements, and official reports, but the further she looks, the less sense any of it makes. 
+
+	Several pages have been torn from their bindings. Notes have been removed, leaving only faint impressions where someone once wrote against the paper beneath. 
+	Dates don't quite line up. Whole sections of the report seem to lead nowhere.
+
+	Someone has been through these files. Someone has deliberately taken things out.
+
+	Ashe looks towards the bedroom door, her pulse beginning to quicken.
+	Ashe: ... I need to talk to Dad. 
 	<<obtain_evidence GameManager "Case Files">>
 	<<hide_evidence GameManager>>
 	You got Case Files.
 	<<set $checked_box = true>>
+<<else>>
+	Ashe: ... I'll pick these up later.
 <<endif>>
+
 ===
+
 
 title: Teddy
 ---
@@ -143,52 +184,221 @@ title: Teddy
 	Let's let him sleep for a little while longer
 <<else>>
 	<<if $speak_to_teddy == false>>
-		//Speak with Teddy
+		Her father is still on the couch when she enters the living room, half-asleep beneath an old blanket. The television flickers across his face. 
+		For a second, she considers leaving him alone. Then her gaze drops to the eviction letters in her hand, and whatever hesitation she has left disappears.
 		<<start_character_conv CharacterManager "Ashe">>
-		Ashe: Dad. Wake up. We need to talk.
+		Ashe: Dad.
+
+		He makes a vague noise without opening his eyes.
+
+		Ashe: Dad, wake up.
 		<<start_character_conv CharacterManager "Ashe" "Teddy">>
-		Teddy: A-ashe? Y-yawn. What did you want to talk about?
-		-> React angrily
-			<<show_character_expression CharacterManager "Ashe" "angry">>
-			Ashe: Why didn't you tell me about the eviction! 
-			<<show_character_expression CharacterManager "Teddy" "sad">>
-			Teddy:...
-		-> Try to be calm
-			<<show_character_expression CharacterManager "Ashe" "sad">>
-			Ashe: Dad. ... We're being evicted?
-			<<show_character_expression CharacterManager "Teddy" "sad">>
-			Teddy:...
+		Teddy: What?
+
+		He shifts, pulling the blanket away from his face. 
+
+		Teddy: What's wrong?
+
+		Ashe holds up the folder. 
+
+		Ashe: What is this?
+
+		His eyes settle on the papers. At first, he looks confused. Then something changes in his expression, an anger so quick that she might have missed it if she hadn't been watching him so closely.
+		<<show_character_expression CharacterManager "Teddy" "angry">>
+		Teddy: Where did you get that?
+
+		Ashe: Under your bed. In a box full of old case files.
+
+		Her father sits up slowly. 
+		<<show_character_expression CharacterManager "Teddy" "default">>
+		Teddy: Put it away, Ashe.
+		<<show_character_expression CharacterManager "Ashe" "angry">>
+		Ashe: No. Don't do that.
+
+		Teddy: Do what?
+
+		Ashe: That.
+
+		She gestures at him, the folder, the living room. 
+
+		Ashe: Act like I'm being unreasonable for asking a simple question. Pages are missing. Someone's taken things out of these files, and I want to know why.
+
+		Teddy: It's old paperwork. It doesn't concern you.
+
+		Ashe: Then why were you hiding it?
+
+		Teddy: I'm not hiding anything.
+		<<show_character_expression CharacterManager "Ashe" "smug">>
+		She laughs, but there's no humour in it.
+		Ashe: Right. And the eviction letters? Are those old paperwork too?
+
+		His gaze flicks towards the envelopes in her hand.
+		<<show_character_expression CharacterManager "Ashe" "default">>
+		For a moment, neither of them speak.
+		<<show_character_expression CharacterManager "Ashe" "sad">>
+		Ashe: How long? 
+
+		Teddy: How long what?
+
+		Ashe: How long have you known about the eviction?
+
+		He rubs a hand over his face. 
+
+		Teddy: I was going to sort it out.
+
+		Ashe: When?
+
+		Teddy: When I could.
+		<<show_character_expression CharacterManager "Ashe" "angry">>
+		Ashe: With what money? Her voice rises before she can stop it. We can barely afford anything, and now we're apparently losing the flat, and you've been sitting on all of this like it's nothing!
+
+		Teddy: Keep your voice down.
+		<<show_character_expression CharacterManager "Ashe" "sad">>
+		Ashe: Why? So the neighbours don't hear? So nobody finds out what a mess everything is?
+
+		Teddy: That's enough.
+		<<show_character_expression CharacterManager "Ashe" "shout">>
+		Ashe: No, it's not enough!
+
+		She throws the eviction letters onto the table. 
+
+		Ashe: You keep telling me everything's fine, and it never is! You don't tell me anything. You don't explain anything. You just expect me to go along with it and pretend I don't notice when things are falling apart!
+		<<show_character_expression CharacterManager "Teddy" "angry">>
+		Teddy: You think I don't know things are bad? You think I need you standing here reminding me?
+
+		Ashe: Then do something about it!
+
+		The words hang between them.
+		<<show_character_expression CharacterManager "Teddy" "sad">>
+		His face hardens. 
+
+		Teddy: You have no idea what you're talking about.
+		<<show_character_expression CharacterManager "Ashe" "sad">>
+		Ashe: Then explain it to me!
+
+		Ashe snatches up the case file and holds it towards him. 
+
+		Ashe: Explain Victor Winslow. Explain why you've got reports about your accident hidden in a box under your bed with his name on the report. Explain why half the bloody paperwork is missing!
+
+		Teddy: Leave it alone.
+
+		Ashe: Why?
+		<<show_character_expression CharacterManager "Teddy" "angry">>
+		Teddy: Because I said so!
+
+		The sudden sharpness of his voice makes her take a step back. She stares at him, searching his face for something she can understand. Guilt. Fear. Anger. Anything that might tell her why this name matters so much.
+		<<show_character_expression CharacterManager "Ashe" "default">>
+		Instead, he reaches for the folder.
+
+		She pulls it away.
+		<<show_character_expression CharacterManager "Teddy" "default">>
+		Teddy: Give it to me, Ashe.
+
+		Ashe: No.
+
+		Teddy: Don't make this worse than it already is.
+
+		She looks down at the papers in her hands, then back at him.
+
+		Ashe: You already have.
+
+		He says something under his breath, something bitter and exhausted, and when she asks him to repeat it, he snaps. 
+		<<show_character_expression CharacterManager "Teddy" "angry">>
+		<<show_character_expression CharacterManager "Ashe" "angry">>
+		The argument spills into accusations neither of them can take back. He tells her she's being selfish, that she doesn't understand what he's had to deal with. 
+		<<show_character_expression CharacterManager "Ashe" "shout">>
+		She tells him he's a coward for refusing to tell her the truth. 
+		He brings up everything he's done for her, every sacrifice, every sleepless night, as though she has no right to be frightened or angry because he has suffered too.
+
+		And then he says something about Victor that makes her go completely still.
+
+		Not an explanation. Not an answer.
+
+		A warning.
+
+		Teddy: Stay away from that case, Ashe. You don't know what you're getting yourself into.
+		<<show_character_expression CharacterManager "Teddy" "sad">>
+		<<show_character_expression CharacterManager "Ashe" "sad">>
+		She stares at him.
+
+		For the first time, she isn't just angry. She's afraid of what he might know, and even more afraid of what he might be willing to keep from her.
+		<<show_character_expression CharacterManager "Ashe" "default">>
+		Ashe: Fine.
+
+		A lie.
+
+		She drops the folder onto the couch and turns towards the front door.
+
+		Teddy: Ashe, where are you going?
+
+		She grabs her bag from the hook.
+		Ashe: I'm not doing this with you.
+
+		Teddy: Don't walk away while I'm talking to you.
+
+		She yanks the door open. 
+		<<show_character_expression CharacterManager "Ashe" "shout">>
+		Ashe: Then maybe you should've started talking to me before now!
+
+		She slams it behind her.
 		<<set $speak_to_teddy = true>>
 		<<end_character_conv CharacterManager>>
-		Ashe: I need to speak to Janet. Maybe she's being evicted too
-	<<else>>
-		<<start_character_conv CharacterManager "Ashe" "Teddy">>
-		Ashe:...
-		Teddy: I'm sorry Ashe.
-		<<end_character_conv CharacterManager>>
+		<<goto_room GameManager Neighbours>>
+		<<wait 2>>
+		<<play_dialogue_delay DialogueManager Neighbour>>
 	<<endif>>
 <<endif>>
 ===
 
 title: Neighbour
 ---
-<<if $speak_to_teddy == true>>
+	Her neighbour, an elderly woman named Pearl in comfortable clothing, stands in the doorway of her flat, her expression softening at the sight of Ashe.
 	<<start_character_conv CharacterManager "Ashe" "Neighbour">>
-	Ashe: Janet! Do you know anything about the eviction?
-	Janet: ...So you've seen it too.
-	Janet: Don't get involved Ashe. This is too dangerous for someone as young as you.
-	Janet: Even your father ...
-	<<show_character_expression CharacterManager "Ashe" "angry">>
-	Ashe: "What about my dad?"
-	Janet: ...
-	Janet: It's Victor Winslow. He owns this complex.
-	Janet: ... I know I won't be able to stop you. Stay safe Ashe.
-	Ashe: ...
-	<<end_character_conv CharacterManager>>
-	<<start_character_conv CharacterManager "Ashe">>
-	Ashe: ... What do I have to lose? 
+	Pearl: Oh, love. What's happened now?
+
+	Pearl guides her into the warm, familiar living room, where the smell of tea lingers in the air. For a moment, Ashe stands there, trying to gather herself. 
+	Then the argument with her father spills out in fragments\: the case files, the missing papers, and the eviction letters.
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe: We're being evicted.
+
+	Pearl reaches for a pile of paperwork on the coffee table. She passes Ashe a letter, her fingers trembling slightly. Another eviction notice.
+
+	Pearl: They’re clearing out the whole building. Apparently, someone’s bought the property. Bought the lot of it.
+
+	Ashe: Who?
+
+	Pearl: Victor Winslow.
+	<<show_character_expression CharacterManager "Ashe" "default">>
+	Ashe goes still.
+
+	The name sends a chill through her. She thinks of the files beneath Teddy's bed, the missing pages, and her father’s sudden panic when she questioned him.
+
+	Ashe: The billionaire?
+
+	Pearl: The very same.
+
+	Pearl: Money like his, people like him… they don’t care who they hurt. We’re just numbers on a page to them.
+	<<show_character_expression CharacterManager "Neighbour" "sad">>
+	She looks at Ashe with quiet concern.
+
+	Pearl: Promise me you won’t go digging around in this; if you are anything like your father, you'll go looking. Dangerous people like Winslow don’t take kindly to being challenged.
+
+	Ashe stares at the eviction notice, her jaw tightening.
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe: And we’re just supposed to leave?
+
+	Pearl: Sometimes, love, there’s nothing else we can do.
+
+	Ashe: There has to be something.
+
+	The older woman reaches for her hand, but Ashe pulls away gently, already lost in thought.
+
+	Everyone she knows is about to lose their flat, and the man responsible might hold the answers to everything she's just uncovered.
+
+	Ashe: I’m going to find out what he’s hiding.
+
+	Because what else does she have to lose?
 	<<end_character_conv CharacterManager>>
 	<<change_location GameManager "Winslow Building">>
-<<endif>>
 ===
 

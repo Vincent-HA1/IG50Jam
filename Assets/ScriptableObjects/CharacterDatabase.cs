@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,8 +19,10 @@ public class CharacterDatabase : ScriptableObject
                 return character.angry;
             case "sad":
                 return character.sad;
-            case "happy":
-                return character.happy;
+            case "shout":
+                return character.shout;
+            case "smug":
+                return character.smug;
         }
         return null;
     }

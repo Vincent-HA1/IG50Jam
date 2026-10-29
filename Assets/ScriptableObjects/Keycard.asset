@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   evidenceName: Keycard
   description: A security card for Victor's office
-  evidenceIcon: {fileID: 21300000, guid: cabaa9e19255cdb47af3f638bda865f9, type: 3}
-  evidenceFull: {fileID: 21300000, guid: bca21bac9d6999c43814986e75250810, type: 3}
+  evidenceIcon: {fileID: 21300000, guid: 0cf51c836b7bc5145866539fdc78fbb5, type: 3}
+  evidenceFull: {fileID: 21300000, guid: 0cf51c836b7bc5145866539fdc78fbb5, type: 3}

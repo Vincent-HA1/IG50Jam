@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,8 +7,8 @@ public class Character
     public Sprite defaultPose;
     public Sprite angry;
     public Sprite sad;
-    public Sprite happy;
-
+    public Sprite shout;
+    public Sprite smug;
 
 
 }

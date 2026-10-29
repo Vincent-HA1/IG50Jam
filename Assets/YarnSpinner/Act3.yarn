@@ -1,93 +1,197 @@
-﻿title: Colleague_Call
+﻿title: Act_3
 ---
-<<start_character_conv CharacterManager "Ashe">>
-Ashe: ... I see. 
-Unknown: You need to get out of there Ashe. Try to get home befo-
-...thud.
-Ashe: Hello? Are you still there? 
-Ashe: ... Shit. What's going on? 
-<<end_character_conv CharacterManager>>
-I need to call Dad. 
+<<play_music SoundManager Victor_1>> 
+<<play_sfx SoundManager office_call>>
+<<set $victor_calling = true>>
 ===
 
-title: Teddy_Call
----
-<<declare $called_teddy = false>>
-<<if $called_teddy == false>>
-	<<start_character_conv CharacterManager "Ashe">>
-	Ashe: ...Please pick up. 
-	...
-	Ashe: Dad! 
-	<<start_character_conv CharacterManager "Ashe" "Teddy">>
-	Teddy: Ashe! Where are you? I've been trying to call you for hours! 
-	Ashe: ... Dad. Please. Tell me the truth. Your leg ... It wasn't an accident was it?
-	Teddy: ... 
-	Teddy: So you know. ... Please don't do anything reckless Ashe.
-	Teddy: The people involved ... they can hurt us. Hurt you. I would never forgive myself if that were to happen.
-	Ashe: Dad! This ... 
-	Teddy: Pl-
-	...click
-	<<end_character_conv CharacterManager>>
-	<<start_character_conv CharacterManager "Ashe">>
-	Ashe: Dad? My phone lost connection! 
-	<<play_sfx SoundManager phone>> 
-	Ashe: ... What's that sound? 
-	<<set $victor_calling = true>>
-	<<end_character_conv CharacterManager>>
-<<else>>
-	It's no use. My phone won't connect.
-<<endif>>
-===
 
 title: Victor_Call
 ---
 <<declare $victor_calling = false>>
 <<declare $victor_called = false>>
 <<if $victor_calling == true and $victor_called == false>>
+	Ashe turns towards the heavy-looking telephone sitting on the corner of the desk, its brass fittings gleam beneath the office lights. 
+	For a moment, she simply stares at it, wondering who could be calling Victor at this hour.
+	She glances towards the door. Still closed.
+
+	Slowly, she reaches for the receiver, lifting it from its cradle.
 	<<stop_sfx SoundManager>>
 	<<start_character_conv CharacterManager "Ashe">>
-	Unknown: So you're the "mouse" scurrying around my office. How pleasing to make your acquaintance. 
-	Ashe: ...
-	Unknown: Unfortunately, I cannot be there in person. But I think we both know the ... circumstances you find yourself in. 
-	Ashe: You- ... What do you want? 
-	Unknown: ... I want to help you and your father. All I ask for is something simple in return. 
-	Ashe: ...
-	Unknown: Hand over the evidence you've managed to "acquire". And I will allow you both to relocate to one of my properties.
-	Ashe: ... And if I say no? 
-	Unknown: Well ... we both know that won't happen. Not with the state your poor father is in. 
-	Ashe: Why you-
-	...click
-	Ashe: ... 
-	<<set $victor_called = false>>
-	<<end_character_conv CharacterManager>>
+	Ashe: Hello?
+
+	Victor: An interesting place to be snooping around, isn't it, Miss Wright?
+
+	Her blood runs cold.
+
+	Ashe: Who is this?
+
+	A cold chuckle comes through the receiver.
+
+	Victor: I believe you're in my office.
+
+	She tightens her grip on the receiver, glancing at the scattered documents across his desk. 
+	Ashe: How do you know my name?
+
+	Victor: I make a habit of knowing who's interested in my business. Particularly when they start going through confidential files.
+	<<show_character_expression CharacterManager "Ashe" "angry">>
+	Ashe: Then you can explain what I've found. Why are you buying entire buildings just to leave them empty? Why are families being forced out of their homes?
+
+	Viktor sighs, though his voice remains remarkably calm.
+
+	Victor: Because property is an investment, Ashe. And investments are rarely as straightforward as people would like them to be. 
+	Victor: I understand that the evictions have caused considerable distress, but the situation is more complicated than a collection of unfortunate families losing their homes.
+
+	Ashe: That's a convenient way of putting it.
+
+	Victor: Perhaps. But I'm not calling to argue with you.
+
+	Ashe: Then why are you calling?
+
+	Victor: To offer you some help.
+	<<show_character_expression CharacterManager "Ashe" "default">>
+	The answer catches her off guard.
+
+	Viktor continues, his tone almost sympathetic. 
+
+	Victor: I've looked into your circumstances. You and your father are facing eviction yourselves, aren't you? I imagine things have been difficult.
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe's jaw tightens. 
+
+	Ashe: You don't know anything about us.
+
+	Victor: On the contrary. I know your father has struggled since his accident, and I know you've been trying to keep your family afloat. You shouldn't have to carry that burden alone.
+
+	For a moment, she says nothing. She hates how easily his words reach the part of her that is exhausted, frightened, and desperately tired of worrying about where they'll live.
+	<<show_character_expression CharacterManager "Ashe" "default">>
+	Ashe: What exactly are you offering?
+
+	Victor: I can give you and your father a secure home. All you have to do is hand over the evidence.
+	<<show_character_expression CharacterManager "Ashe" "shout">>
+	Ashe: And the families you’ve evicted? You’ll just carry on as if nothing happened?
+
+	Victor: I’m offering you a chance to protect your own family. Your father has suffered enough, wouldn't you agree? 
+	Victor: You can help him by saying yes to me, or you can risk losing everything trying to "save" people you barely know.
+	<<show_character_expression CharacterManager "Ashe" "default">>
+	Ashe looked at the documents in front of her, stuffed into her bag. 
+	<<set $victor_called = true>>
 	<<jump Ashe_Decision>>
 <<endif>>
 ===
 
 title: Ashe_Decision
 ---
-... What do I do? 
-Dad. I-I don't know what to think. 
--> Escape with the evidence
-	...
-	I won't let that bastard get away with this. 
+<<play_music SoundManager Victor_2>> 
+What will you do?
+-> Reject his offer
+	<<end_character_conv CharacterManager>>
 	<<show_cutscene DialogueManager 4>>
 -> Hand over the evidence
-	...
-	This is for the best. We can be happy. 
-	This is ... for dad. It is. 
+	Victor: Think carefully, Ashe.
+	She thinks about her father's accident, the unpaid bills, and the eviction notices waiting at home.
+	Ashe: If I give you everything; stay silent, you guarantee we can stay in our home?
+	Victor: You have my word.
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe: And you leave my father alone?
+	Victor: Of course.
+	Ashe knows she is making a terrible compromise, but she can’t bear the thought of losing her home as well as everything else she and her father had already endured.
+	<<show_character_expression CharacterManager "Ashe" "default">>
+	Ashe: Fine.
+	The word quiet, hesitant. 
+	Ashe: You have a deal. I won't say a word about everything I've learned.
+	Victor: Good.
+	<<end_character_conv CharacterManager>>
+	Victor confirms the arrangements, and Ashe leaves the building with a promise of security and the weight of everything she has chosen to conceal.
 	<<show_cutscene DialogueManager 5>>
 ===
 
 title: Ending_1
 ---
-And they all lived happily ever after.
+<<play_music SoundManager act_1>>
+Ashe returns home. Teddy is sitting on the couch, watching the news. Images of Victor Winslow’s company fill the television, alongside reports about the leaked documents and families forced from their homes.
+
+When he notices her, he quickly turns down the volume.
+
+Teddy: Is it true? Did you release everything?
+
+Ashe nods. 
+
+Ashe: I couldn’t let him get away with it, Dad. People deserve to know.
+
+Teddy looks back at the screen. 
+
+Teddy: They’re saying Victor could face prosecution. But his lawyers are already denying everything, and he's a powerful bloke with the city in his pocket.
+
+Ashe: What happens now? Can we stop the eviction? Will we even be allowed to stay here?
+
+Teddy: I don’t know. But I know Victor. I wish I could promise you everything will be okay.
+
+Ashe sits beside him.
+
+Ashe: I’m sorry if I’ve made things worse.
+
+Teddy: No.
+
+Teddy shakes his head. 
+
+Teddy: You did what I couldn’t bring myself to do.
+
+Ashe: You were trying to protect me.
+
+Teddy: And you were trying to protect everyone else.
+
+They sit together, listening as the reporter describes the growing investigation. Victor might face justice, or he might escape behind his lawyers. Nothing is certain.
+
+Teddy reaches for Ashe’s hand.
+
+Teddy: The truth is finally out.
+
+Ashe squeezes his hand. 
+
+Ashe: Then let’s hope someone finally listens.
+<<stop_music SoundManager>>
 <<end_game GameManager>>
 ===
 
 title: Ending_2
 ---
-And they all lived happily ever after.
+<<play_music SoundManager act_1>>
+When she returns home, Teddy is watching the news. 
+
+The reporter briefly mentions allegations against Winslow’s company, but no evidence has been released publicly.
+
+Teddy: You’re back. What happened?
+
+Ashe sits beside him.
+
+In this moment, she could lie to him.
+
+She chooses not to.
+
+Ashe: I made a deal with Viktor. We’ll have somewhere to live. You won’t have to worry about the eviction anymore.
+
+Teddy studied her face. 
+
+Teddy: And the evidence? 
+
+Ashe: He's got it.
+
+He looks back at the television. 
+
+Teddy: So the truth stays buried?
+
+Ashe: ... For now
+
+Teddy: It seems both of us have chosen to place our hope in the hands of other people.
+
+Ashe: I did it for us, Dad. I didn't want to risk him coming after us, hurting you ... again.
+
+Teddy: You tried, okay? The most important thing for me is that you're okay. You're safe.
+
+Teddy takes her hand, but neither of them smile. 
+
+Their future is more secure, but the families Victor has displaced are still waiting for justice. Justice that may never come.
+<<stop_music SoundManager>>
 <<end_game GameManager>>
 ===
 

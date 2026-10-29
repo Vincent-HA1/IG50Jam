@@ -1,0 +1,598 @@
+//Apartment.yarn
+
+title: Bathroom_Cutscene
+---
+<<play_music SoundManager act_1>> 
+<<play_sfx SoundManager tap>> 
+<<show_cutscene DialogueManager 0>>
+The bathroom, cramped. 
+
+The overhead light flickered intermittently, casting a sickly yellow glow across cracked white tiles. Ashe stands before the porcelain sink, shoulders slumped, hands resting against the edges with a toothbrush between her fingers as the sound of running water fills the air.
+
+Her gaze is fixed on her reflection in the mirror, though there is little focus in her eyes. Dark circles shadow them, and her expression is drawn with exhaustion, her lips resting in a faint, unhappy line.
+
+She has been standing there for some time, too tired to move and too lost in thought to look away. Her mind is pushing unwanted memories into her skull about her father.
+
+Teddy. A Police Officer. A professional rule-follower, an occasional terrible-joke enthusiast, and the sort of man who thought a uniform could fix just about anything. He used to run towards danger while everyone else ran away.
+
+Then came the accident.
+
+One moment, he was a police officer doing his job. The next, he was in a hospital bed, one leg gone, and neither of them had the faintest idea what came next.
+
+A reminder of a disinfectant smell.
+
+Relentless hospital beeping.
+
+Teddy staring at the space where his leg used to be.
+
+The urge to say something comforting, but Ashe's emotional support software had crashed. So she stood there, silent and frozen in time.
+
+The doctors told Ashe how lucky she was that he survived.
+
+Ashe: Lucky.
+That's what everyone called it. As if Teddy losing a leg was an acceptable trade-off for staying alive.
+Ashe: People love saying the right things when they don't have to live with the aftermath.
+A forced, crooked smile.
+A heavy sigh.
+<<play_sfx_one_shot SoundManager wash_face>>
+A splash of cold water over her face. 
+<<stop_sfx SoundManager>>
+The hope that it'll wash away the thoughts along with the toothpaste.
+<<play_dialogue_delay DialogueManager Ashe_1>>
+===
+
+title: Bathroom_Test
+---
+The hope that it'll wash away the thoughts along with the toothpaste.
+<<play_dialogue_delay DialogueManager Ashe_1>>
+===
+
+
+title: Ashe_1
+---
+<<start_character_conv CharacterManager "Ashe">>
+Ashe: ...
+<<show_character_expression CharacterManager "Ashe" "sad">>
+Ashe: I should go wake up Dad.
+<<end_character_conv CharacterManager>>
+===
+
+title: Enter_Living_Room
+---
+<<if $seen_eviction == false>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: What's that under the door? 
+	<<block_travel GameManager>>
+	<<end_character_conv CharacterManager>>
+<<endif>>
+===
+
+title: Go_To_Neighbour
+---
+<<if $speak_to_teddy == false>>
+	I need to go talk to Dad.
+<<else>>
+	<<goto_room GameManager Neighbours>>
+	<<wait 2>>
+	<<play_dialogue_delay DialogueManager Neighbour>>
+<<endif>>
+===
+
+title: Eviction_Under_Door
+---
+<<declare $seen_eviction = false>>
+<<if $seen_eviction == false>>
+	<<show_evidence GameManager "Eviction Letter">>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: What the...
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe: We're getting ... evicted?
+	Ashe: ...
+	<<hide_evidence GameManager>>
+	<<set $seen_eviction = true>>
+	<<allow_travel GameManager>>
+<<else>>
+	...
+	No point looking at it again
+<<endif>>
+<<end_character_conv CharacterManager>>
+===
+
+title: Enter_Teddy_Room
+---
+<<declare $entered_teddy_room = false>>
+<<if $entered_teddy_room == false>>
+	...thud
+	<<show_evidence GameManager "Pill Bottle">>
+	Gotta pick up the bottle.
+	<<set $entered_teddy_room = true>>
+	<<hide_evidence GameManager>>
+	<<enable_object GameManager Bottle>>
+<<endif>>
+===
+
+title: Block_Leave
+---
+<<if $seen_eviction == false>>
+	I need to check what's under the door
+<<endif>>
+===
+
+title: Medicine_Bottle
+---
+...
+I'm going to have to pick them all up later.
+
+===
+
+title: Examine_Box
+---
+<<declare $checked_box = false>>
+<<if $checked_box == false>>
+	What's this? 
+	<<show_evidence GameManager "Case Files">>
+	Case files?
+	...
+	I can't believe Dad hid this from me.
+	<<obtain_evidence GameManager "Case Files">>
+	<<hide_evidence GameManager>>
+	You got Case Files.
+	<<set $checked_box = true>>
+<<endif>>
+===
+
+title: Teddy
+---
+<<declare $speak_to_teddy = false>>
+<<if $checked_box == false>>
+	...
+	Dad must be tired.
+	Let's let him sleep for a little while longer
+<<else>>
+	<<if $speak_to_teddy == false>>
+		//Speak with Teddy
+		<<start_character_conv CharacterManager "Ashe">>
+		Ashe: Dad. Wake up. We need to talk.
+		<<start_character_conv CharacterManager "Ashe" "Teddy">>
+		Teddy: A-ashe? Y-yawn. What did you want to talk about?
+		-> React angrily
+			<<show_character_expression CharacterManager "Ashe" "angry">>
+			Ashe: Why didn't you tell me about the eviction! 
+			<<show_character_expression CharacterManager "Teddy" "sad">>
+			Teddy:...
+		-> Try to be calm
+			<<show_character_expression CharacterManager "Ashe" "sad">>
+			Ashe: Dad. ... We're being evicted?
+			<<show_character_expression CharacterManager "Teddy" "sad">>
+			Teddy:...
+		<<set $speak_to_teddy = true>>
+		<<end_character_conv CharacterManager>>
+		Ashe: I need to speak to Janet. Maybe she's being evicted too
+	<<else>>
+		<<start_character_conv CharacterManager "Ashe" "Teddy">>
+		Ashe:...
+		Teddy: I'm sorry Ashe.
+		<<end_character_conv CharacterManager>>
+	<<endif>>
+<<endif>>
+===
+
+title: Neighbour
+---
+<<if $speak_to_teddy == true>>
+	<<start_character_conv CharacterManager "Ashe" "Neighbour">>
+	Ashe: Janet! Do you know anything about the eviction?
+	Janet: ...So you've seen it too.
+	Janet: Don't get involved Ashe. This is too dangerous for someone as young as you.
+	Janet: Even your father ...
+	<<show_character_expression CharacterManager "Ashe" "angry">>
+	Ashe: "What about my dad?"
+	Janet: ...
+	Janet: It's Victor Winslow. He owns this complex.
+	Janet: ... I know I won't be able to stop you. Stay safe Ashe.
+	Ashe: ...
+	<<end_character_conv CharacterManager>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: ... What do I have to lose? 
+	<<end_character_conv CharacterManager>>
+	<<change_location GameManager "Winslow Building">>
+<<endif>>
+===
+
+
+//Winslow Building
+title: Outside_Of_Office
+---
+<<play_music SoundManager act_2>> 
+Ashe: ...
+Ashe: ... I guess I made it all the way here. 
+===
+
+title: Doorman
+---
+Doesn't seem like he's going to budge.
+===
+
+title: Enter_Office
+---
+<<declare $entered_office = false>>
+<<if $entered_office == false>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: ... Probably time for me to go in.
+	<<show_evidence GameManager "Teddy Call">>
+	<<play_sfx SoundManager phone_ring>> 
+	ring-ring...ring-ring
+	Ashe: What? ... Dad? 
+	<<hide_evidence GameManager>>
+	<<stop_sfx SoundManager>> 
+	<<start_character_conv CharacterManager "Ashe" "Teddy">>
+	<<show_character_expression CharacterManager "Teddy" "angry">>
+	Teddy: Ashe! Where are you? You're not in danger are you? 
+	<<show_character_expression CharacterManager "Ashe" "angry">>
+	Ashe: I'm fine! I'm just ... out somewhere.  
+	Teddy: Ashe, I know you can be reckless, but please don't do anything to put yourself in harm's way.
+	<<show_character_expression CharacterManager "Teddy" "sad">>
+	Teddy: There are people out there who can hurt you. I ... want you to be safe.
+	<<show_character_expression CharacterManager "Ashe" "sad">>
+	Ashe: I'll be fine Dad. I'll be back for dinner.
+	Teddy: ... Alright. Stay safe. 
+	<<end_character_conv CharacterManager>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: ... 
+	<<end_character_conv CharacterManager>>
+	<<set $entered_office = true>>
+<<else>>
+	<<goto_room GameManager "Ground">>
+	<<if $entered_office_inside == false>>
+		<<wait 2>>
+		<<play_dialogue_delay DialogueManager "Inside_Office">>
+	<<endif>>
+<<endif>>
+===
+
+title: Inside_Office
+---
+<<declare $entered_office_inside = false>>
+Ashe: This is fancy. Now ... how to get upstairs.
+<<set $entered_office_inside = true>>
+===
+
+title: Receptionist
+---
+<<start_character_conv CharacterManager "Ashe">>
+Receptionist: ...What do you want?
+Ashe: ... N-nothing. Just looking around.
+Receptionist: Is that so?
+Receptionist: Well, don't make a scene. 
+<<end_character_conv CharacterManager>>
+===
+
+title: To_First_Floor
+---
+Looks like I can sneak past here...
+	-> Try to sneak past
+		...
+		It worked!
+		<<goto_room GameManager "First Floor">>
+	-> Find another way through
+		... I'll look for another way
+===
+
+title: Locked_Door
+---
+... The door is locked.
+===
+
+title: Pick_Lock
+---
+This lock looks slightly loose. 
+Maybe I can pick the lock? 
+-> Try to pick the lock
+	<<play_minigame MinigameManager "Lockpick" "Lockpick_Success" "Lockpick_Fail">>
+-> Find another way upstairs
+===
+
+title: Lockpick_Success
+---
+I did it! 
+<<goto_room GameManager "Second Floor">>
+===
+
+title: Lockpick_Fail
+---
+...Shit. Someone's coming. 
+<<wait 2>>
+...
+Let me try that again. 
+<<play_minigame MinigameManager "Lockpick" "Lockpick_Success" "Lockpick_Fail">>
+===
+
+title: Locked_Door_Check_1
+---
+<<if $security_guard_present == false>>
+	<<declare $door_1_checked = false>>
+	<<declare $doors_checked = 0>>
+	...This door is locked. 
+	<<if $door_1_checked == false>>
+		<<set $door_1_checked = true>>
+		<<set $doors_checked = $doors_checked + 1>>
+	<<endif>>
+	<<if $doors_checked >= 3>>
+		<<jump Security_Guard_Entrance>>
+	<<endif>>
+<<endif>>
+
+===
+
+title: Locked_Door_Check_2
+---
+<<if $security_guard_present == false>>
+	<<declare $door_2_checked = false>>
+	...This door is locked. 
+	<<if $door_2_checked == false>>
+		<<set $door_2_checked = true>>
+		<<set $doors_checked = $doors_checked + 1>>
+	<<endif>>
+	<<if $doors_checked >= 3>>
+		<<jump Security_Guard_Entrance>>
+	<<endif>>
+<<endif>>
+===
+
+title: Locked_Door_Check_3
+---
+<<if $security_guard_present == false>>
+	<<declare $door_3_checked = false>>
+	...This door is locked. 
+	<<if $door_3_checked == false>>
+		<<set $door_3_checked = true>>
+		<<set $doors_checked = $doors_checked + 1>>
+	<<endif>>
+	<<if $doors_checked >= 3>>
+		<<jump Security_Guard_Entrance>>
+	<<endif>>
+<<endif>>
+===
+
+title: Security_Guard_Entrance
+---
+<<declare $security_guard_present = false>>
+<<wait 1>>
+... What do I do now? 
+I can't pick the lock like last time. 
+...
+Shit, I think someone's coming
+<<start_character_conv CharacterManager "Ashe">>
+Security Guard: Yawn. No one comes around here anyway. I don't know why I have to be stationed up here.
+Security Guard: It's not like anyone has the security card except for me. 
+Ashe: ... 
+<<end_character_conv CharacterManager>>
+<<enable_object GameManager Security>>
+<<set $security_guard_present = true>>
+===
+
+title: Security_Guard
+---
+... He's not looking.
+I bet I can swipe the card. 
+-> Try take his card
+	... Here goes nothing
+	<<play_minigame MinigameManager "Steal" "Stole_Keys" "Steal_Fail">>
+	<<disable_object GameManager Security>>
+-> Decide against it
+	... This is such a dumb idea
+===
+
+title: Steal_Fail
+---
+I think he noticed me! 
+...
+<<wait 2>>
+Let me try that again. 
+<<play_minigame MinigameManager "Steal" "Stole_Keys" "Steal_Fail">>
+===
+title: Stole_Keys
+---
+<<show_evidence GameManager "Keycard">>
+<<obtain_evidence GameManager "Keycard">>
+You got the Security Keycard.
+<<hide_evidence GameManager>>
+... Gotta wait for him to leave. 
+...
+Time to use the card. 
+...
+It worked! 
+<<goto_room GameManager "Victor Office">>
+<<jump Inside_Victor_Office>>
+===
+
+title: Inside_Victor_Office
+---
+<<play_music SoundManager Victor>> 
+<<wait 2>>
+...
+I'm actually inside his office. Now let's see what I can find
+===
+
+title: Victor_PC_1
+---
+<<declare $seen_pc_1 = false>>
+<<if $seen_pc_1 ==false >>
+	<<if $seen_pc_2 == false>>
+		<<show_evidence GameManager "Winslow Purchases">>
+		What's this?
+		He's been buying properties... but they're all empty. 
+		<<hide_evidence GameManager>>
+
+	<<else>>
+		...
+		Even more properties listed here. This is insane. 
+	<<endif>>
+	<<set $seen_pc_1 = true>>
+<<else>>
+	...
+<<endif>>
+===
+
+title: Victor_PC_2
+---
+<<declare $seen_pc_2 = false>>
+<<if $seen_pc_2 ==false >>
+	<<if $seen_pc_1 == false>>
+		What's this?
+		He's been buying properties... but they're all empty. 
+	<<else>>
+		...
+		Even more properties listed here. This is insane. 
+	<<endif>>
+	<<set $seen_pc_2 = true>>
+<<else>>
+	...
+<<endif>>
+===
+
+title: Teddy_Case
+---
+<<show_evidence GameManager "Teddy Case">>
+These files... 
+They're about Dad! 
+...
+I can't believe this.
+<<obtain_evidence GameManager "Teddy Case">>
+<<hide_evidence GameManager>>
+You got Teddy's Case File.
+<<jump Pursuer>>
+===
+
+title: Pursuer
+---
+<<wait 1>>
+<<play_sfx_one_shot SoundManager text>>
+<<start_character_conv CharacterManager "Ashe">>
+Ashe: What the... Someone's messaging me
+Unknown: Hey. 
+Unknown: Don't think what you're doing is going unnoticed.
+Unknown: You shouldn't be sticking your nose into things you know nothing about. 
+Unknown: ... Especially if you want to keep your head. 
+Ashe: ...
+<<end_character_conv CharacterManager>>
+<<enable_object GameManager "Escape_Office">>
+===
+
+title: Attempt_Leave
+---
+<<start_character_conv CharacterManager "Ashe">>
+Ashe: ... I need to get out of here. 
+Ashe: ... What? The door is locked! 
+Ashe: ...I need help. Now. 
+<<play_sfx SoundManager phone_ring_anon>>
+ring...ring...
+<<stop_sfx SoundManager>>
+Unknown: Who is this? 
+Ashe: ... This is Teddy's daughter. What can you tell me about Victor?
+Unknown: ...
+<<change_location GameManager "Winslow Building 2">>
+===
+
+//Act 3
+title: Colleague_Call
+---
+<<play_music SoundManager Victor>> 
+<<start_character_conv CharacterManager "Ashe">>
+Ashe: ... I see. 
+Unknown: You need to get out of there Ashe. Try to get home befo-
+...thud.
+Ashe: Hello? Are you still there? 
+Ashe: ... Shit. What's going on? 
+<<end_character_conv CharacterManager>>
+I need to call Dad. 
+===
+
+title: Teddy_Call
+---
+<<declare $called_teddy = false>>
+<<if $called_teddy == false>>
+	<<play_sfx SoundManager phone_ring>> 
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: ...Please pick up. 
+	...
+	<<stop_sfx SoundManager>> 
+	Ashe: Dad! 
+	<<start_character_conv CharacterManager "Ashe" "Teddy">>
+	Teddy: Ashe! Where are you? I've been trying to call you for hours! 
+	Ashe: ... Dad. Please. Tell me the truth. Your leg ... It wasn't an accident was it?
+	Teddy: ... 
+	Teddy: So you know. ... Please don't do anything reckless Ashe.
+	Teddy: The people involved ... they can hurt us. Hurt you. I would never forgive myself if that were to happen.
+	Ashe: Dad! This ... 
+	Teddy: Pl-
+	...click
+	<<end_character_conv CharacterManager>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Ashe: Dad? My phone lost connection! 
+	<<show_evidence GameManager "Ashe Phone">>
+	Ashe: ...
+	Ashe: ... Shit. It doesn't work at all. 
+	<<hide_evidence GameManager>>
+	<<play_sfx SoundManager office_call>> 
+	Ashe: ... What's that sound? 
+	<<set $victor_calling = true>>
+	<<end_character_conv CharacterManager>>
+<<else>>
+	It's no use. My phone won't connect.
+<<endif>>
+===
+
+title: Victor_Call
+---
+<<declare $victor_calling = false>>
+<<declare $victor_called = false>>
+<<if $victor_calling == true and $victor_called == false>>
+	<<stop_sfx SoundManager>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Unknown: So you're the "mouse" scurrying around my office. How pleasing to make your acquaintance. 
+	Ashe: ...
+	Unknown: Unfortunately, I cannot be there in person. But I think we both know the ... circumstances you find yourself in. 
+	Ashe: You- ... What do you want? 
+	Unknown: ... I want to help you and your father. All I ask for is something simple in return. 
+	Ashe: ...
+	Unknown: Hand over the evidence you've managed to "acquire". And I will allow you both to relocate to one of my properties.
+	Ashe: ... And if I say no? 
+	Unknown: Well ... we both know that won't happen. Not with the state your poor father is in. 
+	Ashe: Why you-
+	...click
+	Ashe: ... 
+	<<set $victor_called = false>>
+	<<end_character_conv CharacterManager>>
+	<<jump Ashe_Decision>>
+<<endif>>
+===
+
+title: Ashe_Decision
+---
+... What do I do? 
+Dad. I-I don't know what to think. 
+-> Escape with the evidence
+	...
+	I won't let that bastard get away with this. 
+	<<show_cutscene DialogueManager 4>>
+-> Hand over the evidence
+	...
+	This is for the best. We can be happy. 
+	This is ... for dad. It is. 
+	<<show_cutscene DialogueManager 5>>
+===
+
+title: Ending_1
+---
+And they all lived happily ever after.
+<<end_game GameManager>>
+===
+
+title: Ending_2
+---
+And they all lived happily ever after.
+<<end_game GameManager>>
+===
+
+

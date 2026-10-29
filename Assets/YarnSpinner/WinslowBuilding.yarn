@@ -1,93 +1,78 @@
 ﻿title: Outside_Of_Office
 ---
 <<play_music SoundManager act_2>> 
-Ashe: ...
-Ashe: ... I guess I made it all the way here. 
+Ashe finds herself standing outside the Winslow building before she’s even fully considered what she’s doing. 
+The towering glass façade reflects the grey sky above.
+Its polished entrance is guarded by security personnel who look as though they’ve never had to worry about where they’ll sleep at night. 
+She stares up at the highest floors, anger simmering beneath her skin. Somewhere inside this building are the answers she needs, and she’s determined to find them.
 ===
 
-title: Doorman
----
-Doesn't seem like he's going to budge.
-===
 
 title: Enter_Office
 ---
 <<declare $entered_office = false>>
 <<if $entered_office == false>>
-	<<start_character_conv CharacterManager "Ashe">>
-	Ashe: ... Probably time for me to go in.
-	ring-ring...ring-ring
-	Ashe: What? ... Dad? 
+	Her phone vibrates.
+	<<play_sfx SoundManager phone_ring>> 
+	Teddy is calling her.
+	<<show_evidence GameManager "Teddy Call">>
+	She hesitates before answering, already bracing herself for the lecture.
+	<<hide_evidence GameManager>>
+	<<stop_sfx SoundManager>>
 	<<start_character_conv CharacterManager "Ashe" "Teddy">>
 	<<show_character_expression CharacterManager "Teddy" "angry">>
-	Teddy: Ashe! Where are you? You're not in danger are you? 
-	<<show_character_expression CharacterManager "Ashe" "angry">>
-	Ashe: I'm fine! I'm just ... out somewhere.  
-	Teddy: Ashe, I know you can be reckless, but please don't do anything to put yourself in harm's way.
-	<<show_character_expression CharacterManager "Teddy" "sad">>
-	Teddy: There are people out there who can hurt you. I ... want you to be safe.
-	<<show_character_expression CharacterManager "Ashe" "sad">>
-	Ashe: I'll be fine Dad. I'll be back for dinner.
-	Teddy: ... Alright. Stay safe. 
+	Teddy: Where the hell are you, Ashe?
+	She winces at the familiar, clipped tone. Even retired, Teddy still sounds like a police officer questioning a suspect.
+	Ashe: Out.
+	Teddy: Out where?
+	Ashe: Why does it matter?
+	Teddy: Because you stormed out of the house, and I know you well enough to know you’re probably doing something stupid.
+	<<show_character_expression CharacterManager "Ashe" "shout">>
+	Ashe: I’m not doing anything stupid! ... I’m just trying to fix something for once.
+	There’s a pause.
+	Teddy: Ashe, please. Just come home.
+	<<show_character_expression CharacterManager "Ashe" "default">>
+	For a moment, guilt threatens to get the better of her. Teddy has enough to worry about without her adding to it, but she can’t bear the thought of returning home empty-handed.
+	Ashe: I’ll be fine. I promise.
+	She ends the call before he can argue.
 	<<end_character_conv CharacterManager>>
 	<<start_character_conv CharacterManager "Ashe">>
 	Ashe: ... 
 	<<end_character_conv CharacterManager>>
 	<<set $entered_office = true>>
 <<else>>
-	<<goto_room GameManager "Ground">>
-	<<if $entered_office_inside == false>>
-		<<wait 2>>
-		<<play_dialogue_delay DialogueManager "Inside_Office">>
+	<<declare $try_pick_lock = false>>
+	<<if $try_pick_lock == false>>
+		Approaching the building, Ashe keeps her head down, slipping past a guard who lurks outside and towards a quieter area around the back of the building.
+		<<set $try_pick_lock = true>>
 	<<endif>>
+	She checks the door. It's closed, but she might be able to pick the lock.
+	-> Try to pick the lock
+		<<play_minigame MinigameManager "Lockpick" "Lockpick_Success" "Lockpick_Fail">>
+	-> Find another way inside
+		Ashe: ... Not a good idea.
 <<endif>>
 ===
 
-title: Inside_Office
----
-<<declare $entered_office_inside = false>>
-Ashe: This is fancy. Now ... how to get upstairs.
-<<set $entered_office_inside = true>>
-===
-
-title: Receptionist
----
-<<start_character_conv CharacterManager "Ashe">>
-Receptionist: ...What do you want?
-Ashe: ... N-nothing. Just looking around.
-Receptionist: Is that so?
-Receptionist: Well, don't make a scene. 
-<<end_character_conv CharacterManager>>
-===
-
-title: To_First_Floor
----
-Looks like I can sneak past here...
-	-> Try to sneak past
-		...
-		It worked!
-		<<goto_room GameManager "First Floor">>
-	-> Find another way through
-		... I'll look for another way
-===
 
 title: Locked_Door
 ---
 ... The door is locked.
 ===
 
-title: Pick_Lock
----
-This lock looks slightly loose. 
-Maybe I can pick the lock? 
--> Try to pick the lock
-	<<play_minigame MinigameManager "Lockpick" "Lockpick_Success" "Lockpick_Fail">>
--> Find another way upstairs
-===
 
 title: Lockpick_Success
 ---
-I did it! 
+... Got it.  
+<<goto_room GameManager "Stairwell">>
+<<wait 2>>
+The door unlocked, Ashe opens it to climb through as quietly as she can.
+The stairwell is dim and smells faintly of concrete and cleaning products. 
+She glances upwards. The stairs stretch several floors above her, disappearing around a series of landings. 
+It's going to take longer than the lift, but at least she won't have to risk being noticed on a camera or questioned by anyone sharing the ride.
+She starts climbing.
+She pauses on a landing on the first floor, listening carefully for footsteps on the other side of the door. Nothing. Just the low hum of the building's ventilation.
+Ashe pushes on, keeping close to the wall and checking the floor numbers until she reaches the highest level.
 <<goto_room GameManager "Second Floor">>
 ===
 
@@ -100,64 +85,27 @@ Let me try that again.
 <<play_minigame MinigameManager "Lockpick" "Lockpick_Success" "Lockpick_Fail">>
 ===
 
-title: Locked_Door_Check_1
+title: Locked_Door_Check
 ---
 <<if $security_guard_present == false>>
 	<<declare $door_1_checked = false>>
 	<<declare $doors_checked = 0>>
-	...This door is locked. 
-	<<if $door_1_checked == false>>
-		<<set $door_1_checked = true>>
-		<<set $doors_checked = $doors_checked + 1>>
-	<<endif>>
-	<<if $doors_checked >= 3>>
-		<<jump Security_Guard_Entrance>>
-	<<endif>>
+	...This door is locked. A keycard is required to unlock it
+	<<jump Security_Guard_Entrance>>
 <<endif>>
 
-===
-
-title: Locked_Door_Check_2
----
-<<if $security_guard_present == false>>
-	<<declare $door_2_checked = false>>
-	...This door is locked. 
-	<<if $door_2_checked == false>>
-		<<set $door_2_checked = true>>
-		<<set $doors_checked = $doors_checked + 1>>
-	<<endif>>
-	<<if $doors_checked >= 3>>
-		<<jump Security_Guard_Entrance>>
-	<<endif>>
-<<endif>>
-===
-
-title: Locked_Door_Check_3
----
-<<if $security_guard_present == false>>
-	<<declare $door_3_checked = false>>
-	...This door is locked. 
-	<<if $door_3_checked == false>>
-		<<set $door_3_checked = true>>
-		<<set $doors_checked = $doors_checked + 1>>
-	<<endif>>
-	<<if $doors_checked >= 3>>
-		<<jump Security_Guard_Entrance>>
-	<<endif>>
-<<endif>>
 ===
 
 title: Security_Guard_Entrance
 ---
 <<declare $security_guard_present = false>>
 <<wait 1>>
-... What do I do now? 
-I can't pick the lock like last time. 
-...
-Shit, I think someone's coming
-<<start_character_conv CharacterManager "Ashe">>
+Ashe: ... Shit. 
+Ashe punches the door, frustrated. 
+Hearing the sound of incoming footsteps, she hides behind a corner. 
 Security Guard: Yawn. No one comes around here anyway. I don't know why I have to be stationed up here.
 Security Guard: It's not like anyone has the security card except for me. 
+<<start_character_conv CharacterManager "Ashe">>
 Ashe: ... 
 <<end_character_conv CharacterManager>>
 <<enable_object GameManager Security>>
@@ -166,42 +114,43 @@ Ashe: ...
 
 title: Security_Guard
 ---
-... He's not looking.
-I bet I can swipe the card. 
+The security guard looks out of the window, distracted.
 -> Try take his card
-	... Here goes nothing
+	Ashe: ... Here goes nothing.
 	<<play_minigame MinigameManager "Steal" "Stole_Keys" "Steal_Fail">>
 	<<disable_object GameManager Security>>
 -> Decide against it
-	... This is such a dumb idea
+	Ashe: ... This is such a dumb idea.
 ===
 
 title: Steal_Fail
 ---
-I think he noticed me! 
+Ashe: I think he noticed me! 
 ...
 <<wait 2>>
-Let me try that again. 
+Ashe: Let me try that again. 
 <<play_minigame MinigameManager "Steal" "Stole_Keys" "Steal_Fail">>
 ===
 title: Stole_Keys
 ---
+<<show_evidence GameManager "Keycard">>
 <<obtain_evidence GameManager "Keycard">>
 You got the Security Keycard.
-... Gotta wait for him to leave. 
+<<hide_evidence GameManager>>
+Ashe: ... Gotta wait for him to leave. 
 ...
-Time to use the card. 
+Ashe: This better work.
 ...
-It worked! 
+She slips inside.
 <<goto_room GameManager "Victor Office">>
 <<jump Inside_Victor_Office>>
 ===
 
 title: Inside_Victor_Office
 ---
+<<play_music SoundManager Victor_1>> 
 <<wait 2>>
-...
-I'm actually inside his office. Now let's see what I can find
+The office is immaculate, all dark wood and floor-to-ceiling windows. Victor is nowhere to be seen, exactly the opportunity Ashe needs.
 ===
 
 title: Victor_PC_1
@@ -209,8 +158,11 @@ title: Victor_PC_1
 <<declare $seen_pc_1 = false>>
 <<if $seen_pc_1 ==false >>
 	<<if $seen_pc_2 == false>>
+		<<show_evidence GameManager "Winslow Purchases">>
 		What's this?
 		He's been buying properties... but they're all empty. 
+		<<hide_evidence GameManager>>
+
 	<<else>>
 		...
 		Even more properties listed here. This is insane. 
@@ -241,39 +193,66 @@ title: Victor_PC_2
 title: Teddy_Case
 ---
 <<show_evidence GameManager "Teddy Case">>
-These files... 
-They're about Dad! 
-...
-I can't believe this.
+Ashe finds her father's name.
+A file detailing his accident sits among the paperwork, marked with confidential annotations.
+You got Teddy's Accident Report.
+Ashe: Someone blocked the inspector from questioning Victor… and the fact he even has this police report in his office…
 <<obtain_evidence GameManager "Teddy Case">>
 <<hide_evidence GameManager>>
-You got Teddy's Case File.
 <<jump Pursuer>>
 ===
 
 title: Pursuer
 ---
-<<wait 1>>
-<<start_character_conv CharacterManager "Ashe">>
-Ashe: What the... Someone's messaging me
-Unknown: Hey. 
-Unknown: Don't think what you're doing is going unnoticed.
-Unknown: You shouldn't be sticking your nose into things you know nothing about. 
-Unknown: ... Especially if you want to keep your head. 
-Ashe: ...
-<<end_character_conv CharacterManager>>
-<<enable_object GameManager "Escape_Office">>
+<<play_sfx_one_shot SoundManager text>>
+Before she can read further, her phone lights up.
+Unknown: We know what you're doing. Walk away before you get hurt.
+Ashe stares at the message, her pulse quickening.
+Someone knows she's here.
+And she’s already found enough evidence to make her stomach turn, but her father's accident report keeps drawing her attention back. 
+The report mentions an internal investigation, missing pages she couldn't see at the flat, and a handwritten telephone number tucked into the back of the file, with the name scribbled out.
+Ashe: ... I have to call them.
+<<enable_object GameManager Call_Colleague>>
 ===
 
-title: Attempt_Leave
+title: Call_Colleague
 ---
-<<start_character_conv CharacterManager "Ashe">>
-Ashe: ... I need to get out of here. 
-Ashe: ... What? The door is locked! 
-Ashe: ...I need help. Now. 
-ring...ring...
-Unknown: Who is this? 
-Ashe: ... This is Teddy's daughter. What can you tell me about Victor?
-Unknown: ...
-<<change_location GameManager "Winslow Building 2">>
+<<declare $phone_broken = false>>
+<<if $phone_broken == false>> 
+	Ashe pulls out her phone and dials, glancing towards the office door as she waits for someone to answer.
+	<<play_sfx SoundManager phone_ring_anon>>
+	ring...ring...
+	<<stop_sfx SoundManager>>
+	<<start_character_conv CharacterManager "Ashe">>
+	Unknown: Hello?
+	Ashe: My name’s Ashe. I found your number in a case file about Teddy’s accident. He’s my dad.
+	The silence on the other end tightens her grip on the phone.
+	Unknown: What have you found?
+	Ashe: I’m in Victor Winslow’s office. I found documents connecting him to the evictions, and there’s a file about my dad’s accident. 
+	Ashe: I think he was investigating Winslow before it happened. Do you know anything about that?
+	A sharp breath crackles through the speaker.
+	Unknown: Your father was looking into Winslow’s property dealings. Families were being forced out of their homes, and Teddy started connecting the evictions to some very questionable financial arrangements. 
+	Unknown: Then the cases started disappearing. Witnesses withdrew their statements, and we were ordered to stop asking questions.
+	Ashe’s eyes dart towards the office door.
+	<<show_character_expression CharacterManager "Ashe" "angry">>
+	Ashe: Who ordered it? Was Winslow involved in my dad’s accident?
+	Unknown: I can't prove he was responsible for the accident, but Teddy was getting close to something powerful people wanted buried. Listen, you need to get out of that building. If Winslow’s people discover-
+	The call crackles violently.
+	Ashe: Hello? Are you still there?
+	<<end_character_conv CharacterManager>>
+	<<show_evidence GameManager "Ashe Phone">>
+	Her phone screen flickers, briefly displaying a jumble of coloured lines before going completely black.
+	Ashe stares at it.
+	She presses the power button. 
+	Nothing. 
+	It's not working.
+	<<hide_evidence GameManager>>
+	Ashe: What am I meant to do?
+	A cold sensation creeps up her spine. The phone had been working perfectly moments ago. Now, just as she was about to learn something important, it had suddenly stopped.
+	Then the telephone in Victor's office rings.
+	<<set $phone_broken = true>>
+	<<change_location GameManager "Winslow Building 2">>
+<<else>>
+	It's no use. It won't turn on.
+<<endif>>
 ===

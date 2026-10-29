@@ -15,5 +15,5 @@ MonoBehaviour:
   evidenceName: Case Files
   description: A set of worn out documents. They seem to relate to a case Teddy was
     involved in
-  evidenceIcon: {fileID: 21300000, guid: cabaa9e19255cdb47af3f638bda865f9, type: 3}
-  evidenceFull: {fileID: 21300000, guid: bca21bac9d6999c43814986e75250810, type: 3}
+  evidenceIcon: {fileID: 21300000, guid: 28435070b83e5d649bf79c3b9cc95946, type: 3}
+  evidenceFull: {fileID: 21300000, guid: 268aab02ff9c5ff46a462c9f407d8a75, type: 3}

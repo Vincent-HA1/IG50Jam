@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   evidenceName: Teddy Case
   description: Details around Teddy's accident
-  evidenceIcon: {fileID: 21300000, guid: cabaa9e19255cdb47af3f638bda865f9, type: 3}
-  evidenceFull: {fileID: 21300000, guid: bca21bac9d6999c43814986e75250810, type: 3}
+  evidenceIcon: {fileID: 21300000, guid: 85608e2f7aa8a664ead7610e91442f92, type: 3}
+  evidenceFull: {fileID: 21300000, guid: 85608e2f7aa8a664ead7610e91442f92, type: 3}

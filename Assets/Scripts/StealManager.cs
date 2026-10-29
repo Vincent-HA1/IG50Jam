@@ -1,6 +1,5 @@
 
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class StealManager : Minigame
@@ -142,7 +141,7 @@ public class StealManager : Minigame
         if (statusText != null)
         {
             statusText.text =
-                $"Round {currentRound}/{maxRounds} - Press SPACE in the target!";
+                $"Round {currentRound}/{maxRounds}";
         }
     }
 
@@ -185,9 +184,7 @@ public class StealManager : Minigame
 
         if (statusText != null)
         {
-            statusText.text = success
-                ? "SUCCESS!"
-                : "FAILED! TRY AGAIN";
+            statusText.text = "";
         }
 
         if (success)
